@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo Form</title>
+  </head>
+  <h1>Create account</h1>
+  <body>
+    <main>
+      <fieldset>
+        <legend>Registration information</legend>
+        <form action="" id="name">
+          <label for="name">First name*:</label>
+          <input type="text" id="name" />
+          <label for="Last">Last name:</label>
+          <input type="text" id="Last" />
+          <br /><br />
+          <label for="email">Email*:</label>
+          <input type="email" name="email" id="email" />
+          <label for="Phone">Phone*:</label>
+          <input type="number" name="phone" id="phone" />
+          <br /><br />
+          <label for="Password">Password*:</label>
+          <input type="password" name="Password" id="Password" />
+          <label for="Password">Confirm Password*:</label>
+          <input type="password" name="Password" id="Password" />
+          <br />
+        </form>
+      </fieldset>
+      <br /><br /><br />
+      <fieldset>
+        <legend>Personal Information</legend>
+        <label for="Gender">Gender:</label>
+        <label for="Gender">Male</label>
+        <input type="radio" id="male" name="gender" value="true" />
+        <label for="Gender">Female</label>
+        <input type="radio" id="female" name="gender" value="fail" />
+        <label for="Hobbies:">Hobbies:</label>
+        <label for="Music">Music</label>
+        <input type="checkbox" name="music" value="Music" />
+        <label for="Sport">Sport</label>
+        <input type="checkbox" name="Sport" value="Sport" />
+        <label for="Travel">Travel</label>
+        <input type="checkbox" name="Travel" value="Travel" />
+        <label for="Movies">Movies</label>
+        <input type="checkbox" name="Movies" value="Movies" />
+        <br />
+        <label for="Source">Source of income:</label>
+        <select name="source" id="source">
+          <option value="Employed">Employed</option>
+          <option value="Friends">Friends</option>
+        </select>
+        <label for="income">Income:</label>
+        <input type="range" />
+        <br />
+        <label for="Age">Age:</label>
+        <input type="number" name="Age" value="Age" max="99" maxlength="2" />
+        <label for="picture">Profile Picture:</label>
+        <input type="file" name="picture" />
+        <br />
+        <label for="Birthday">Birthday:</label>
+        <input type="date" name="bday" />
+        <label for="Address">Address:</label>
+        <input type="text" name="Address" maxlength="200" />
+        <br /><br />
+        <label for="bio">Bio:</label>
+        <textarea name="Bio" id="" cols="60" rows="3"></textarea>
+      </fieldset>
+      <br />
+      <label for="create"></label>
+      <input type="submit" name="submit" id="submit" />
+      <label for="Reset"></label>
+      <input type="reset" name="reset" id="reset" />
+    </main>
+  </body>
+</html>
