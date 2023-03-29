@@ -1,0 +1,63 @@
+body {
+  font-family: "Courier New", Courier, monospace;
+  padding: 30px;
+  font-size: 20px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.card {
+  display: inline-block;
+  width: 49%;
+  vertical-align: top;
+}
+
+li {
+  list-style: none;
+}
+
+.image{
+    width: 100%;
+    height: 500px;
+    background-color: cornflowerblue;
+    border-radius: 10px;
+}
+
+.card > h3 {
+    margin: 10px;
+}
+
+.icon-h{
+    font-size: 80px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: pink;
+    font-weight: 700;
+    display: inline-block;
+    width: 20%;
+    text-align: center;
+    color: white;
+    vertical-align: top;
+
+}
+
+.card > li{
+    padding: 20px 0;
+    border-bottom: 1px dashed red;
+}
+
+.card-content{
+    display: inline-block;
+    width: 75%;
+}
+.card-content > h3{
+vertical-align: top;
+}
+
+.card > li:last-child {
+    border-bottom: none;
+}

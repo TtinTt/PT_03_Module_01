@@ -1,0 +1,52 @@
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+
+  }
+
+  body {
+    color: #6e6e6e;
+    font-family: Helvetica,sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+.field-A, .field-B, textarea{
+    box-sizing: border-box;
+    color: #6e6e6e;
+    padding-left: 20px;
+  }
+
+  input[type="text"]{
+    height: 40px;
+
+  }
+
+  .field-A{width: 49%;}
+  .field-B{width: 100%;} 
+
+input[type="button"] {
+    background-color: #7dcefd;
+    color: #fff;
+    min-width: 125px;
+    padding: 11px 10px;
+    text-align: center;
+  }
+
+  section { margin: 30px auto;
+    width: 90%}
+h2 {
+        color: #383838;
+        font-size: 18px;
+    }
+
+    input[type="email"], span {        float: right;
+    }
+textarea {
+        padding-top: 10px;
+        height: 250px;
+    }

@@ -1,0 +1,48 @@
+.card-1, .card-2 {
+    display: inline-block;
+    vertical-align: top;
+  }
+  .card-1{
+    width: 20%;
+  }
+.card-2
+{width: 59%;
+}
+.underlined{
+    background-color: rgb(177, 194, 29);
+    height: 0.5px;
+    width: 80px;
+}
+.list, input, textarea {
+    list-style: none;
+    text-align: left;
+    color: darkgrey;  
+    font-size: 15px;
+    vertical-align: top;
+    }
+ i {
+        text-align: left;
+        color: darkgrey;  
+        font-size: 35px;
+        }
+        
+input, textarea{width:100%;}
+
+.Send-Message {
+    color: white;
+    background-color: rgb(19, 201, 155);
+    width: 140px;
+    text-align: center;
+}
+h1{margin: 0px;}
+  
+  * {
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+    padding: 5px 0px;
+  }
+
+  body{    padding: 80px;
+  }
+
+  

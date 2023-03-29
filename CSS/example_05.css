@@ -1,0 +1,32 @@
+
+*{ text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+    font-size: 14px;
+    
+}
+section{width: 95%; height:max-content;
+    padding: 10px;
+    margin: 0 auto;
+    background-color: rgb(219, 219, 219);
+}
+input, select, option{
+    display: inline-block;
+    width: 46%;
+    margin: 1% 1%;
+    text-align: left;
+    padding: 10px;
+    border: 1px solid rgb(219, 219, 219);
+    color: rgb(219, 219, 219);
+
+}
+textarea, input:last-of-type {
+    width: 95%;
+    margin: 1% 1%;
+    text-align: left;
+    border: 1px solid rgb(219, 219, 219);
+    color: rgb(219, 219, 219);
+
+
+}
+input:last-of-type {text-align: center;height: 40px;color: white;background-color: rgb(41, 41, 41);}
