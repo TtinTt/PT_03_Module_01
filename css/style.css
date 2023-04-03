@@ -367,7 +367,7 @@ footer {
   font-family: "Poppins", sans-serif;
 }
 .footer-1 {
-  width: 25%;
+  width: 18%;
   position: relative;
   top: -15px;
 }
@@ -434,7 +434,7 @@ footer h2 {
 footer p {
   color: #5e6282;
   font-size: 13px;
-  width: 60%;
+  width: 100%;
   padding-top: 20px;
 }
 
@@ -451,4 +451,15 @@ footer h3 {
   font-size: 21;
   font-weight: boild;
   padding-bottom: 20px;
+}
+.source p {
+  width: 100%;
+  font-size: 13px;
+  font-family: "Poppins", sans-serif;
+  color: #5e6282;
+  position: relative;
+  top: 1750px;
+  padding-bottom: 140px;
+  display: flex;
+  justify-content: center;
 }
