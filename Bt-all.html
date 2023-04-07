@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai Tap</title>
+    <style>
+      body {
+        text-align: center;
+      }
+      .card {
+        padding: 30px;
+        display: inline-block;
+        width: 70%;
+        text-align: center;
+        border: 3px gray solid;
+        margin: 17px;
+        background-color: darkgrey;
+        border-radius: 100px;
+      }
+      button {
+        width: 30%;
+        height: 60px;
+        color: rgb(255, 255, 255);
+        background-color: rgb(80, 113, 119);
+        border-radius: 200px;
+        border-color: rgb(26, 37, 46);
+      }
+    </style>
+  </head>
+  <body>
+    <section class="card">
+      <button onclick="CalculateAverage()">
+        Bấm để nhập điểm tính trung bình cộng
+      </button>
+    </section>
+    <section class="card">
+      <button onclick="CalculateTemperature()">Bấm để đổi độ C ra độ F</button>
+    </section>
+    <section class="card">
+      <button onclick="CalculateAcreage()">
+        Bấm để tính diện tích hình tròn
+      </button>
+    </section>
+    <section class="card">
+      <button onclick="CalculatePerimeter()">
+        Bấm để tính chu vi hình tròn
+      </button>
+    </section>
+    <script>
+      function CalculateAverage() {
+        const mathMark = Number(prompt("nhập điểm toán"));
+        const physicsMark = Number(prompt("nhập điểm lý"));
+        const biologyMark = Number(prompt("nhập điểm sinh"));
+        const sum = mathMark + physicsMark + biologyMark;
+        const average = sum / 3;
+        console.log("kiểm tra tổng", sum, "trung bình cộng là:", average);
+      }
+
+      function CalculateTemperature() {
+        const Celsius = Number(prompt("nhập độ C"));
+        const Fahrenheit = (Celsius / 5) * 9 + 32;
+        console.log(Celsius, "độ C tương ứng ", Fahrenheit, "độ F");
+      }
+      function CalculateAcreage() {
+        const radius = Number(prompt("nhập bán kính"));
+        const acreage = 3.1415 * radius * radius;
+        console.log(
+          "Diện tích của hình tròn bán kính ",
+          radius,
+          " là:",
+          acreage
+        );
+      }
+      function CalculatePerimeter() {
+        const radius = Number(prompt("nhập bán kính"));
+        const perimeter = 3.1415 * 2 * radius;
+        console.log(
+          "Chu vi của hình tròn bán kính ",
+          radius,
+          " là:",
+          perimeter
+        );
+      }
+    </script>
+  </body>
+</html>
