@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SS6</title>
+  </head>
+  <body>
+    <section class="card">
+      <button onclick="markCal()">Xếp loại học sinh</button>
+    </section>
+
+    <section class="card">
+      <button onclick="bmiCal()">Phân loại chỉ số cơ thể</button>
+    </section>
+
+    <script>
+      //   console.log ("hello JS")
+
+      //   if(7>10) {
+      //       console.log("7 lớn hơn 10")
+      //   }
+      //           if(7<20) {
+      //       console.log("7 bé hơn 20")
+      //   }
+
+      //   let ischeck = false;
+      //   if (ischeck) {
+      //       console.log("đã được kiểm tra");
+      //   } else { console.log("chưa được kiểm tra");}
+
+      //   ischeck=!ischeck
+      //   ?console.log("đã được kiểm tra lần 2")
+      //   :console.log("không kiểm tra nữa");
+
+      function markCal() {
+        const mark = Number(prompt("nhập vào điểm của học sinh"));
+
+        if (mark >= 8) {
+          console.log("học sinh giỏi");
+        } else if (mark >= 7 && mark < 8) {
+          // && mark<8 là dư thừa
+          console.log("học sinh khá");
+        } else if (mark >= 5) {
+          console.log("học sinh trung bình");
+        } else {
+          console.log("học sinh trung bình");
+        }
+      }
+
+      function bmiCal() {
+        const weight = Number(prompt("nhập cân nặng"));
+        const height = Number(prompt("nhập chiều cao"));
+        const bmi = (weight / (height * height)).toFixed(1);
+
+        switch (true) {
+          case bmi < 18.5:
+            console.log("Cân nặng thấp (gầy)");
+            break;
+          case bmi <= 24.9:
+            console.log("Cân nặng bình thường");
+            break;
+          case bmi == 25:
+            console.log("Thừa cân");
+            break;
+          case bmi <= 29.9:
+            console.log("Tiền béo phì");
+            break;
+          case bmi <= 34.9:
+            console.log("Béo phì độ I");
+            break;
+          case bmi <= 39.9:
+            console.log("Béo phì độ II");
+            break;
+          case bmi > 40:
+            console.log("Béo phì độ III");
+            break;
+          default:
+            console.log("Dữ liệu không chính xác");
+        }
+      }
+    </script>
+  </body>
+</html>

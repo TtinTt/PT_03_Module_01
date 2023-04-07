@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BT-SS6</title>
+    <style>
+      .card {
+        width: 90%;
+        height: 100px;
+        /* border-radius: 20px; */
+        border: 2px solid rgb(149, 148, 151);
+        padding-left: 100px;
+        padding-bottom: 20px;
+        /* margin: 10px; */
+        background-color: rgb(168, 167, 170);
+      }
+      h3 {
+        color: rgb(0, 0, 0);
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+      input {
+        width: 200px;
+        height: 20px;
+        border-radius: 10px;
+      }
+      button {
+        height: 25px;
+        background-color: rgb(83, 59, 100);
+        color: aliceblue;
+        border-radius: 10px;
+      }
+      p {
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="card">
+      <h3>Bài tập 1</h3>
+      <input type="number " placeholder="Nhập vào số a" id="number-a" />
+      <input type="number " placeholder="Nhập vào số b" id="number-b" />
+      <button onclick="handleEx1()">
+        Kiểm tra xem a có chia hết cho b không
+      </button>
+      <br />
+      <p id="resultContent"></p>
+    </section>
+
+    <section class="card">
+      <h3>Bài tập 2</h3>
+      <input type="age" placeholder="Nhập vào số tuổi" id="age" />
+      <button onclick="handleEx2()">
+        Kiểm tra xem có đủ tuổi để học lớp 10 chưa
+      </button>
+      <br />
+      <p id="resultContent-2"></p>
+    </section>
+
+    <section class="card">
+      <h3>Bài tập 3</h3>
+      <input
+        type="number"
+        placeholder="Nhập vào số nguyên bất kỳ"
+        id="number"
+      />
+      <button onclick="handleEx3()">
+        Kiểm tra xem đây có phải là một số nguyên lớn hoặc nhỏ hơn 0 không
+      </button>
+      <br />
+      <p id="resultContent-3"></p>
+    </section>
+
+    <section class="card">
+      <h3>Bài tập 4</h3>
+      <input type="number" placeholder="Nhập vào số thứ nhất" id="number-1" />
+      <input type="number" placeholder="Nhập vào số thứ hai" id="number-2" />
+      <input type="number" placeholder="Nhập vào số thứ ba" id="number-3" />
+
+      <button onclick="handleEx4()">Kiểm tra xem số nào lớn nhất</button>
+      <br />
+      <p id="resultContent-4"></p>
+    </section>
+
+    <section class="card">
+      <h3>Bài tập 5</h3>
+      <input
+        type="number"
+        placeholder="Nhập vào điểm bài kiểm tra"
+        id="score-1"
+      />
+      <input
+        type="number"
+        placeholder="Nhập vào điểm thi giữa kỳ"
+        id="score-2"
+      />
+      <input
+        type="number"
+        placeholder="Nhập vào điểm thi cuối kỳ"
+        id="score-3"
+      />
+
+      <button onclick="handleEx5()">
+        Kiểm tra xếp hạng học lực của học sinh
+      </button>
+      <br />
+      <p id="resultContent-5"></p>
+    </section>
+
+    <script>
+      function handleEx1() {
+        const a = Number(document.getElementById("number-a").value);
+        const b = Number(document.getElementById("number-b").value);
+        const result = document.querySelector("#resultContent");
+        let resultContent = "";
+        if (a % b == 0) {
+          resultContent = "Chia hết";
+        } else {
+          resultContent = "Không chia hết";
+        }
+        result.innerHTML = resultContent;
+      }
+
+      function handleEx2() {
+        const age = Number(document.getElementById("age").value);
+        const result = document.querySelector("#resultContent-2");
+        let resultContent = "";
+        if (age >= 15) {
+          resultContent = "Đã đủ tuổi";
+        } else {
+          resultContent = "Chưa đủ tuổi";
+        }
+        result.innerHTML = resultContent;
+      }
+
+      function handleEx3() {
+        const number = Number(document.getElementById("number").value);
+        const result = document.querySelector("#resultContent-3");
+        let resultContent = "";
+        if (Number.isInteger(number) && number > 0) {
+          resultContent = "Số bạn nhập là số nguyên lớn hơn 0";
+        } else if (Number.isInteger(number) && number < 0) {
+          resultContent = "Số bạn nhập là số nguyên bé hơn 0";
+        } else if (number == 0) {
+          resultContent = "Số bạn nhập bằng 0";
+        } else {
+          resultContent = "Số bạn nhập không phải là số nguyên";
+        }
+
+        result.innerHTML = resultContent;
+      }
+
+      function handleEx4() {
+        const number_1 = Number(document.getElementById("number-1").value);
+        const number_2 = Number(document.getElementById("number-2").value);
+        const number_3 = Number(document.getElementById("number-3").value);
+        const result = document.querySelector("#resultContent-4");
+        let resultContent = "";
+        if (number_1 > number_2 && number_1 > number_3) {
+          resultContent = number_1;
+        } else if (number_2 > number_1 && number_2 > number_3) {
+          resultContent = number_2;
+        } else {
+          resultContent = number_3;
+        }
+        result.innerHTML = "Vậy số lớn nhất là " + resultContent;
+      }
+
+      function handleEx5() {
+        const score_1 = Number(document.getElementById("score-1").value);
+        const score_2 = Number(document.getElementById("score-2").value);
+        const score_3 = Number(document.getElementById("score-3").value);
+        const average = Number((score_1 + score_2 * 2 + score_3 * 3) / 6);
+        const result = document.querySelector("#resultContent-5");
+        let resultContent = "";
+        if (average >= 8) {
+          resultContent = "Giỏi";
+        } else if (average >= 6.5) {
+          resultContent = "Khá";
+        } else if (average >= 5) {
+          resultContent = "Trung bình";
+        } else {
+          resultContent = "Yếu";
+        }
+        result.innerHTML = "Vậy xếp loại của học sinh là " + resultContent;
+      }
+    </script>
+  </body>
+</html>
