@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function BT1() {
+        let result = "Xin chào Rikkei Academy";
+        console.log(result);
+      }
+      BT1();
+
+      function BT2(number) {
+        result = number * number;
+        console.log(result);
+      }
+      BT2(9);
+
+      function BT3(year) {
+        result = Math.ceil(Number(year / 100));
+        console.log(result);
+      }
+      BT3(2001);
+
+      function BT4(text) {
+        let result = "";
+        for (let i = 0; i < 9; i++) {
+          result += text[i];
+        }
+        console.log(result, "...");
+      }
+      BT4(
+        "Cho chuỗi dài hơn 15 ký tự, viết function cắt chuỗi, lấy ra 10 ký tự đầu tiên và thêm vào dấu “…” ở cuối chuỗi"
+      );
+
+      function BT5(word) {
+        const UPPER = "AĂÂBCDĐEÊGHIKLMNOÔƠPQRSTUƯVXYZJW";
+        let result = "";
+
+        if (UPPER.includes(word[0])) {
+          result += word[0];
+        } else {
+          result += word[0].toUpperCase();
+        }
+
+        for (let i = 1; i < word.length; i++) {
+          if (UPPER.includes(word[i])) {
+            result += word[i].toLowerCase();
+          } else {
+            result += word[i];
+          }
+        }
+        console.log(result);
+      }
+      BT5("xiNchÀobẠn");
+
+      function BT6(numbers) {
+        const InputNumbers = numbers.split(",");
+        let result = Number(InputNumbers[0]);
+        for (let i = 0; i < InputNumbers.length + 1; i++) {
+          if (result < Number(InputNumbers[i + 1])) {
+            result = Number(InputNumbers[i + 1]);
+          }
+        }
+        console.log(result);
+      }
+      BT6("1, 2, 3, 4, 5, 6, 77, 5, 3, 55");
+
+      //   bài bt7-1 chưa xong
+      function BT7_1(number) {
+        if (number % 2 == 0) {
+          console.log(number + " là số chẵn");
+        } else {
+          console.log(number + " là số lẽ");
+        }
+      }
+
+      BT7_1(10);
+
+      function BT7_2(number) {
+        let isPrime = true;
+        for (let i = 2; i < number - 1; i++) {
+          if (number % i == 0) {
+            isPrime = false;
+            console.log(number + " không phải là số nguyên tố");
+          }
+          break;
+        }
+        if (isPrime == true) {
+          console.log(number + " là số nguyên tố");
+        }
+      }
+
+      BT7_2(10);
+
+      function BT7_3(number) {
+        let sum = 0;
+        for (let i = 0; i < number; i++) {
+          if (number % i == 0) {
+            sum += i;
+          }
+        }
+        if (sum == number) {
+          console.log(number + " là số hoàn hảo");
+        } else {
+          console.log(number + " không phải là số hoàn hảo");
+        }
+      }
+
+      BT7_3(10);
+
+      function BT8(numbers) {
+        const InputNumbers = numbers.split(",");
+        let sum = Number(InputNumbers[0]);
+        for (let i = 1; i < InputNumbers.length; i++) {
+          sum += Number(InputNumbers[i]);
+        }
+        result = sum / InputNumbers.length;
+        console.log("Trung bình cộng của các số là: ", result);
+      }
+      BT8("1, 2, 3, 4, 5, 6, 77, 5, 3, 55");
+
+      function BT9(number) {
+        let result = "";
+        let i = 2;
+        let count = 1;
+        while ((count = number)) {
+          let isPrime = true;
+          for (let k = 2; k < i - 1; k++) {
+            if (i % k == 0) {
+              isPrime = false;
+              break;
+            }
+          }
+          if (isPrime == true) {
+            result += " " + i;
+            count++;
+          }
+          i++;
+        }
+        console.log(result);
+      }
+
+      BT9(10000);
+    </script>
+  </body>
+</html>

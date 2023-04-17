@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function isPrime(number) {
+        let isPrime = true;
+        for (let i = 2; i < number - 1; i++) {
+          if (number % i == 0) {
+            isPrime = false;
+            console.log(number + " không phải là số nguyên tố");
+            break;
+          }
+        }
+        if (isPrime == true) {
+          console.log(number + " phải là số nguyên tố");
+        }
+      }
+
+      isPrime(10);
+
+      function isPrime2(number) {
+        let result = "";
+        for (let i = 2; i < number; i++) {
+          let isPrime = true;
+          for (let k = 2; k < i - 1; k++) {
+            if (i % k == 0) {
+              isPrime = false;
+              break;
+            }
+          }
+          if (isPrime == true) {
+            result += i + " ";
+          }
+        }
+        console.log(result);
+      }
+
+      isPrime2(10);
+    </script>
+  </body>
+</html>
