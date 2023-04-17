@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SS9(15)-bt2</title>
+    <style></style>
+  </head>
+  <body>
+    <input type="text" id="inputvalue" />
+    <button id="table" onclick="handleTable()">Tạo bảng</button>
+    <table cellpadding="20" border="1" id="myTable"></table>
+  </body>
+  <script>
+    function handleTable() {
+      const valueInput = document.querySelector("#inputvalue").value;
+      const array = valueInput.split(",");
+      for (let row = 0; row < Number(array[0]); row++) {
+        const createRow = document.createElement("tr");
+        for (let col = 0; col < Number(array[1]); col++) {
+          const createCol = document.createElement("td");
+          createRow.appendChild(createCol);
+        }
+        document.getElementById("myTable").appendChild(createRow);
+      }
+    }
+  </script>
+</html>

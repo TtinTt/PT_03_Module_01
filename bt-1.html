@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SS9(15)-bt1</title>
+    <link rel="stylesheet" href="bt-1.css" />
+    <style></style>
+  </head>
+  <body>
+    <h5>THỜI GIAN BÂY GIỜ LÀ:</h5>
+    <section id="clock">
+      <div class="card" id="card1">
+        <p id="hournumber"></p>
+        <span class="describe">GIỜ</span>
+      </div>
+      <div class="card" id="card2">
+        <p id="minutenumber"></p>
+        <span class="describe">PHÚT</span>
+      </div>
+      <div class="card" id="card3">
+        <p id="secondnumber"></p>
+        <span class="describe">GIÂY</span>
+      </div>
+    </section>
+    <script>
+      function clock() {
+        var hour = new Date().getHours();
+        var minute = new Date().getMinutes();
+        var second = new Date().getSeconds();
+        if (hour < 10) {
+          hour = "0" + hour;
+        }
+        if (minute < 10) {
+          minute = "0" + minute;
+        }
+        if (second < 10) {
+          second = "0" + second;
+        }
+        document.getElementById("hournumber").innerHTML = hour;
+        document.getElementById("minutenumber").innerHTML = minute;
+        document.getElementById("secondnumber").innerHTML = second;
+        const changeBGsecond = document.getElementById("card3");
+        const changeBGminute = document.getElementById("card2");
+        const changeBGhour = document.getElementById("card1");
+
+        if (second == 00) {
+          changeBGsecond.style.background = "#ff006a";
+        } else {
+          changeBGsecond.style.background = "#2196f3";
+        }
+        if (minute == 00) {
+          changeBGminute.style.background = "#ff006a";
+        } else {
+          changeBGminute.style.background = "#2196f3";
+        }
+        if (hour == 00) {
+          changeBGhour.style.background = "#ff006a";
+        } else {
+          changeBGhour.style.background = "#2196f3";
+        }
+      }
+      setInterval("clock()", 1000);
+    </script>
+  </body>
+  <script></script>
+</html>
