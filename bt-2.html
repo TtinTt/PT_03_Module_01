@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BT2-SS10(16)</title>
+  </head>
+  <body>
+    <input type="text" id="inputvalue" />
+    <button id="table" onclick="ChangeTemperature()">Nhập độ C để chuyển đổi (giá trị nhỏ nhất -273 độ)</button>
+    <h4 id="output"></h4>
+    <style></style>
+  </body>
+  <script>
+    function Temperature(celsius) {
+      this.celsius = Number(celsius);
+      this.fahrenheit = () => this.celsius*1.8+32 ;
+      this.kelvin = () => this.celsius+273.15;}
+  
+
+
+    function ChangeTemperature(){
+      const valueInput = document.querySelector("#inputvalue").value;
+      const  TemperatureInput = new Temperature(valueInput)
+      if(Number(valueInput)>=-273){
+      const fahrenheit = TemperatureInput.fahrenheit()
+      const kelvin = TemperatureInput.kelvin()
+      const outputValue = document.querySelector("#output");
+      outputValue.innerHTML =  valueInput + " độ C tương ứng " + fahrenheit +" độ F, và " + kelvin + " độ K.";}
+
+      else 
+      
+      {const outputValue = document.querySelector("#output");
+      outputValue.innerHTML =  valueInput + " độ C là không hợp lệ ";}
+
+      };
+  </script>
+</html>

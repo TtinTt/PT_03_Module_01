@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BT1-SS10(16)</title>
+  </head>
+  <body>
+    <input type="text" id="inputvalue" />
+    <button id="table" onclick="RectangleDraw()">Nhập kích thước</button>
+    <h4 id="output"></h4>
+    <div id="RectangleElement"></div>
+    <style></style>
+  </body>
+  <script>
+    function Rectangle(length, width) {
+      this.length = length;
+      this.width = width;
+      this.getArea = () => this.width * this.length;
+      this.getPerimeter = () => (this.width + this.length)*2;
+      this.setWidth = (width) => (this.width = width);
+      this.setHeight = (length) => (this.length = length);
+      this.drawing = (element) => {
+      element.style.width = this.width + "px";
+      element.style.height = this.length + "px";
+      element.style.background = "blueviolet";
+      };
+    }
+    const Rectangle1 = new Rectangle(4, 5);
+    console.log(Rectangle1);
+
+    function RectangleDraw(){
+
+        const valueInput = document.querySelector("#inputvalue").value;
+        const RectangleInput = valueInput.split(",");
+        const Draw = document.getElementById("RectangleElement");
+        let width=Number(RectangleInput[0])
+        let length=Number(RectangleInput[1])
+        const rectangleDrawing = new Rectangle(width, length);
+        const area = rectangleDrawing.getArea();
+        const perimeter = rectangleDrawing.getPerimeter();
+        const infoRectangle = document.querySelector("#output");
+        infoRectangle.innerHTML = "Diện tích hình chữ nhật là " + area +", và chu vi hình chữ nhật là: " + perimeter;
+        rectangleDrawing.drawing(Draw);
+      };
+  </script>
+</html>
