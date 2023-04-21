@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BT1-SS10(16)</title>
+  </head>
+  <body>
+    <input type="text" id="inputvalue" />
+    <button id="table" onclick="CircleDraw()">Nhập đường kính hình tròn</button>
+    <h4 id="output"></h4>
+    <div id="CircleElement"></div>
+    <style>
+      /* p{
+        border-radius: ;
+      } */
+    </style>
+  </body>
+  <script>
+    function Circle(diameter) {
+      this.diameter = diameter;
+      this.getArea = () => (this.diameter / 2) * (this.diameter / 2) * 3.14;
+      this.getPerimeter = () => (this.diameter / 2) * 3.14;
+
+      this.drawing = (element) => {
+        element.style.width = this.diameter + "px";
+        element.style.height = this.diameter + "px";
+        element.style.borderRadius = this.diameter + "px";
+        element.style.background = "blueviolet";
+      };
+    }
+
+    function CircleDraw() {
+      const valueInput = document.querySelector("#inputvalue").value;
+      const Draw = document.getElementById("CircleElement");
+      let diameterInput = Number(valueInput);
+      const circleDrawing = new Circle(diameterInput);
+      const area = circleDrawing.getArea();
+      const perimeter = circleDrawing.getPerimeter();
+      const infoCircle = document.querySelector("#output");
+      infoCircle.innerHTML =
+        "Diện tích hình tròn là " +
+        area +
+        ", và chu vi hình tròn là: " +
+        perimeter;
+      circleDrawing.drawing(Draw);
+    }
+  </script>
+</html>

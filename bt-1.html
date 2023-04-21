@@ -8,7 +8,9 @@
   </head>
   <body>
     <input type="text" id="inputvalue" />
-    <button id="table" onclick="RectangleDraw()">Nhập kích thước</button>
+    <button id="table" onclick="RectangleDraw()">
+      Nhập chiều cao và chiều rộng ngăn cách bằng dấu phẩy
+    </button>
     <h4 id="output"></h4>
     <div id="RectangleElement"></div>
     <style></style>
@@ -18,31 +20,34 @@
       this.length = length;
       this.width = width;
       this.getArea = () => this.width * this.length;
-      this.getPerimeter = () => (this.width + this.length)*2;
+      this.getPerimeter = () => (this.width + this.length) * 2;
       this.setWidth = (width) => (this.width = width);
       this.setHeight = (length) => (this.length = length);
       this.drawing = (element) => {
-      element.style.width = this.width + "px";
-      element.style.height = this.length + "px";
-      element.style.background = "blueviolet";
+        element.style.width = this.width + "px";
+        element.style.height = this.length + "px";
+        element.style.background = "blueviolet";
       };
     }
     const Rectangle1 = new Rectangle(4, 5);
     console.log(Rectangle1);
 
-    function RectangleDraw(){
-
-        const valueInput = document.querySelector("#inputvalue").value;
-        const RectangleInput = valueInput.split(",");
-        const Draw = document.getElementById("RectangleElement");
-        let width=Number(RectangleInput[0])
-        let length=Number(RectangleInput[1])
-        const rectangleDrawing = new Rectangle(width, length);
-        const area = rectangleDrawing.getArea();
-        const perimeter = rectangleDrawing.getPerimeter();
-        const infoRectangle = document.querySelector("#output");
-        infoRectangle.innerHTML = "Diện tích hình chữ nhật là " + area +", và chu vi hình chữ nhật là: " + perimeter;
-        rectangleDrawing.drawing(Draw);
-      };
+    function RectangleDraw() {
+      const valueInput = document.querySelector("#inputvalue").value;
+      const RectangleInput = valueInput.split(",");
+      const Draw = document.getElementById("RectangleElement");
+      let width = Number(RectangleInput[0]);
+      let length = Number(RectangleInput[1]);
+      const rectangleDrawing = new Rectangle(width, length);
+      const area = rectangleDrawing.getArea();
+      const perimeter = rectangleDrawing.getPerimeter();
+      const infoRectangle = document.querySelector("#output");
+      infoRectangle.innerHTML =
+        "Diện tích hình chữ nhật là " +
+        area +
+        ", và chu vi hình chữ nhật là: " +
+        perimeter;
+      rectangleDrawing.drawing(Draw);
+    }
   </script>
 </html>
