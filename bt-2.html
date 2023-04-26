@@ -8,32 +8,37 @@
   </head>
   <body>
     <input type="text" id="inputvalue" />
-    <button id="table" onclick="ChangeTemperature()">Nhập độ C để chuyển đổi (giá trị nhỏ nhất -273 độ)</button>
+    <button id="table" onclick="ChangeTemperature()">
+      Nhập độ C để chuyển đổi (giá trị nhỏ nhất -273 độ)
+    </button>
     <h4 id="output"></h4>
     <style></style>
   </body>
   <script>
     function Temperature(celsius) {
       this.celsius = Number(celsius);
-      this.fahrenheit = () => this.celsius*1.8+32 ;
-      this.kelvin = () => this.celsius+273.15;}
-  
+      this.fahrenheit = () => this.celsius * 1.8 + 32;
+      this.kelvin = () => this.celsius + 273.15;
+    }
 
-
-    function ChangeTemperature(){
+    function ChangeTemperature() {
       const valueInput = document.querySelector("#inputvalue").value;
-      const  TemperatureInput = new Temperature(valueInput)
-      if(Number(valueInput)>=-273){
-      const fahrenheit = TemperatureInput.fahrenheit()
-      const kelvin = TemperatureInput.kelvin()
-      const outputValue = document.querySelector("#output");
-      outputValue.innerHTML =  valueInput + " độ C tương ứng " + fahrenheit +" độ F, và " + kelvin + " độ K.";}
-
-      else 
-      
-      {const outputValue = document.querySelector("#output");
-      outputValue.innerHTML =  valueInput + " độ C là không hợp lệ ";}
-
-      };
+      const TemperatureInput = new Temperature(valueInput);
+      if (Number(valueInput) >= -273) {
+        const fahrenheit = TemperatureInput.fahrenheit();
+        const kelvin = TemperatureInput.kelvin();
+        const outputValue = document.querySelector("#output");
+        outputValue.innerHTML =
+          valueInput +
+          " độ C tương ứng " +
+          fahrenheit +
+          " độ F, và " +
+          kelvin +
+          " độ K.";
+      } else {
+        const outputValue = document.querySelector("#output");
+        outputValue.innerHTML = valueInput + " độ C là không hợp lệ ";
+      }
+    }
   </script>
 </html>

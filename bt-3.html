@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    // 1
+    const Person = {};
+    console.log(Person);
+    Person.firstName = "Nguyễn Văn";
+    Person.lastName = "Bình";
+    console.log(Person);
+    delete Person.lastName;
+    console.log(Person);
+
+    // 2
+    function CheckEmpty(object) {
+      this.object = object;
+      if (Object.keys(object) == 0) {
+        return "Empty";
+      } else {
+        return "NotEmpty";
+      }
+    }
+    console.log(CheckEmpty(Person));
+
+    // 3
+    const Salary = {
+      An: 100,
+      Mai: 120,
+      Đào: 80,
+      Minh: 140,
+      Hoa: 15,
+    };
+
+    function SumSalary(object) {
+      //   this.object = object;
+      let sum = 0;
+      for (const key in object) {
+        sum += object[key];
+      }
+      return sum;
+    }
+
+    console.log(SumSalary(Salary));
+
+    // 4
+    const ObjectInput = {
+      width: 100,
+      height: 800,
+      title: "Đây là Object Input",
+    };
+
+    function DoubleValueNumber(object) {
+      this.object = object;
+      for (const key in object) {
+        if (typeof object[key] == "string") {
+        } else {
+          object[key] = object[key] * 2;
+        }
+      }
+      return object;
+    }
+
+    console.log(DoubleValueNumber(ObjectInput));
+
+    // 5
+    const ObjectInput2 = {
+      width: 100,
+      height: 800,
+    };
+
+    function DoSomething(object) {
+      let valueInput = Object.values(object);
+      this.NumberA = valueInput[0];
+      this.NumberB = valueInput[1];
+
+      this.getSum = function () {
+        return valueInput[0] + valueInput[1];
+      };
+      this.getProduct = function () {
+        return valueInput[0] * valueInput[1];
+      };
+    }
+
+    TestDoSomething = new DoSomething(ObjectInput2);
+    console.log(TestDoSomething.getSum());
+    console.log(TestDoSomething.getProduct());
+
+    // 6
+
+    const Book001 = {
+      bookID: "B001",
+      bookName: "BookNameA",
+      price: 99,
+      author: "BookAAuthor",
+      bookStatus: true,
+      data: "",
+      inputData: function (inputData) {
+        this.data = inputData;
+      },
+      displayData: function () {
+        return (
+          "bookID: " +
+          this.bookID +
+          ", bookName: " +
+          this.bookName +
+          ", price: " +
+          this.price +
+          ", author: " +
+          this.author +
+          ", bookStatus: " +
+          this.bookStatus +
+          ", Data: " +
+          this.data
+        );
+      },
+    };
+
+    console.log(Book001.displayData());
+    Book001.inputData("Lost");
+    console.log(Book001.displayData());
+
+    // 7
+    function BookManage() {
+      this.BookList = [];
+      // thêm sách
+      this.AddBook = (BookInput) => this.BookList.push(BookInput);
+      // hiển thị thông tin list
+      this.DisplayBooks = function () {
+        return this.BookList;
+      };
+      // cập nhật thông tin sách
+
+      this.EditBook = function (BookEditID, NewInfo) {
+        this.BookList.forEach((Book, index) => {
+          if (book.BookID == BookEditID) {
+            this.BookList.slice(index, 1, { ...Book, ...NewInfo });
+          }
+        });
+      };
+
+      //  xoa' sach'
+      this.DeleteBook = function (BookDeleteID) {
+        this.BookList.forEach((Book, index) => {
+          if (book.BookID == BookDeleteID) {
+            this.BookList.slice(index, 1);
+          }
+        });
+      };
+
+      // sap' xe^p'
+      this.SortBook = function () {
+        this.BookList.sort((book1, book2) => book1.price - book2.price);
+      };
+    }
+    //tim` kiem' theo ten:
+    this.FindBook = function (BookName) {
+      const resurt = this.BookList.filter((book) =>
+        book.name.toLowerCase().include(BookName.toLowerCase())
+      );
+      return resurt;
+    };
+    BookListManage = new BookManage();
+    BookListManage.AddBook(Book001);
+    console.log(BookListManage.DisplayBooks());
+  </script>
+</html>
