@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <img src="" alt="" />
+    <button class="buttonCart">+</button>
+  </body>
+</html>
+<script>
+  // // var today = new Date();
+
+  // // let test = { day: today };
+
+  // // let test2 = "2023-04-12T20:52:45.573Z";
+  // // var day2 = new Date(test2);
+  // // console.log(day2);
+  // // console.log(today);
+
+  // const today = new Date();
+  // // console.log(today);
+
+  // // Trừ đi 1 ngày
+
+  // const day2 = new Date(today.setDate(today.getDate() - 3));
+
+  // // console.log(tru);
+
+  // let time = (today - day2) / 1000;
+  // console.log(time);
+  // // if (condition) {
+  // // }
+  function Days(startDay, endDay) {
+    let daystart = new Date(startDay);
+    let dayend = new Date(endDay);
+    let day = (dayend.getTime() - daystart.getTime()) / 86400000;
+    if (day < 0) {
+      day = day * -1;
+    }
+    return day;
+  }
+
+  var today = new Date();
+  let time = Days(today, "2023-05-12T19:50:46.415Z");
+  console.log(time);
+</script>

@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Người Dùng</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/Admin/ProductManage.js"></script>
+    <script src="/Admin/UserManage.js"></script>
+    <script src="/Admin/OrderManage.js"></script>
+    <link rel="stylesheet" href="/Buyer.css" />
+  </head>
+  <body id="body2">
+    <ul class="nav">
+      <li class="nav-item">
+        <nav class="navbar">
+          <div onclick="HomePage()" class="logo-set-small">
+            <img
+              id="icon-logo"
+              style="width: 30px; height: 30px"
+              src="/imgs/TnG Logo - 50x50.png"
+              alt=""
+            />
+            <h5>HANDMADE TnG</h5>
+          </div>
+        </nav>
+      </li>
+      <nav class="set-header">
+        <li class="navbar">
+          <form class="form-inline">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Tìm kiếm</span>
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Tên sản phẩm"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+                id="searchbox"
+                oninput="handleSearch()"
+              />
+            </div>
+          </form>
+        </li>
+        <div id="renderButtonHeader"></div>
+      </nav>
+    </ul>
+
+    <!-- aside -->
+    <div class="page">
+      <h1 id="pageName">Thông tin người dùng</h1>
+
+      <aside class="aside aside-managepage">
+        <div id="group-aside-tag">
+          <div class="aside-tag aside-choosed-tag" onclick="userManagePage()">
+            <i class="fa-solid fa-user-group"></i>
+            <span style="padding-left: 10px">NGƯỜI DÙNG</span>
+          </div>
+
+          <div class="aside-tag aside-unchoose-tag" onclick="orderManagePage()">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+            <span style="padding-left: 10px">ĐƠN HÀNG</span>
+          </div>
+        </div>
+        <hr width="80%" size="1px" align="center" color="black" />
+
+        <hr width="80%" size="1px" align="center" color="black" />
+      </aside>
+
+      <!-- main -->
+      <main class="main2">
+        <div class="user-info"><img src="" id="user-img" alt="" /></div>
+        <div class="user-info-set">
+          <table>
+            <tr class="user-info">
+              <td>Tên:</td>
+              <td></td>
+              <td id="user-name"></td>
+            </tr>
+            <tr class="user-info">
+              <td>Email:</td>
+              <td></td>
+              <td id="user-email"></td>
+            </tr>
+            <tr class="user-info">
+              <td>Ngày sinh:</td>
+              <td></td>
+              <td id="user-date"></td>
+            </tr>
+            <tr class="user-info">
+              <td>Địa chỉ:</td>
+              <td></td>
+              <td id="user-add"></td>
+            </tr>
+            <tr class="user-info">
+              <td>Điện thoại:</td>
+              <td></td>
+              <td id="user-phone"></td>
+            </tr>
+          </table>
+          <div class="setButtonUser">
+            <div
+              data-bs-toggle="modal"
+              data-bs-target="#modalUser"
+              onclick="renderModalUser()"
+              id="button-user-info"
+            >
+              <i class="fa-regular fa-address-card"></i>
+              <span style="padding-left: 10px; font-size: 16px"
+                >CẬP NHẬT THÔNG TIN</span
+              >
+            </div>
+
+            <div
+              data-bs-toggle="modal"
+              data-bs-target="#modalChangepass"
+              id="button-user-info"
+              onclick="changepasspage()"
+            >
+              <i class="fa-regular fa-address-card"></i>
+              <span style="padding-left: 10px; font-size: 16px"
+                >ĐỔI MẬT KHẨU</span
+              >
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div class="footer-card">
+      <footer>
+        <div class="footer">
+          <div class="about">
+            <div onclick="HomePage()" class="logo-set-small">
+              <img
+                id="icon-logo"
+                style="width: 30px; height: 30px"
+                src="/imgs/TnG Logo - 50x50.png"
+                alt=""
+              />
+              <h6>HANDMADE TnG</h6>
+            </div>
+            <section class="about-p">
+              <p>
+                Chúng tôi mang tới những sản phẩm thủ công tuyệt vời! Các sản
+                phẩm luôn được thực hiện với tất cả trái tim của những nghệ nhân
+                lành nghề. Hãy cùng chúng tôi chia sẻ các giá trị tuyệt vời!
+              </p>
+            </section>
+          </div>
+          <div class="info">
+            <h4>Liên kết</h4>
+            <nav>
+              <ul>
+                <li><a href="">Các câu hỏi thường gặp</a></li>
+
+                <li><a href="">Câu chuyện của chúng tôi</a></li>
+                <li><a href="">Chính sách đổi trả</a></li>
+                <li><a href="">Trang chủ</a></li>
+                <li onclick="LoginAdminPage()">
+                  <a href="/Admin/LoginAdmin.html">Truy cập quyền quản trị</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="contact">
+            <h4>Liên hệ</h4>
+            <ul class="link-list">
+              <li><a href="">info@tng.com</a></li>
+              <li><a href="">www.tng.com</a></li>
+              <li><a href="">Da Nang City, Vietnam</a></li>
+              <li><a href="">+03 3333 333</a></li>
+            </ul>
+          </div>
+          <div class="social">
+            <h4>Social</h4>
+            <ul class="link">
+              <li><i class="fab fa-facebook-f"></i> 22.543 Likes</li>
+              <li><i class="fab fa-twitter"></i> 12.860 Followers</li>
+              <li><i class="fab fa-pinterest"></i> 3331 Pins</li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+      <div>
+        <!-- Modal Edit  -->
+        <div
+          class="modal fade"
+          id="modalCarts"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabindex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                  Thông tin giỏ hàng
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div id="form">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th colspan="2" style="text-align: center">Sản phẩm</th>
+                        <th colspan="3" style="text-align: center">
+                          Số lượng x đơn giá
+                        </th>
+                      </tr>
+                    </thead>
+                    <tfoot id="carts-order"></tfoot>
+                  </table>
+                  <hr />
+                  <h6 id="price-css">
+                    Tổng số tiền: <span id="total-order"></span>đ
+                  </h6>
+                  <hr />
+                  <br />
+                  <h6>Thông tin giao hàng:</h6>
+                  <label>Điện thoại: </label>
+                  <br />
+                  <input id="phone-order" type="text" />
+                  <br />
+                  <label>Địa chỉ: </label>
+                  <br />
+                  <input id="add-order" type="text" />
+                  <br />
+                  <label>Lưu ý cho người giao hàng: </label>
+                  <br />
+                  <input id="note-order" type="text" />
+                  <br />
+                  <br />
+                  <p id="arletMsg">
+                    Vui lòng kiểm tra kỹ địa chỉ giao hàng trước khi Xác nhận!
+                  </p>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Đóng
+                </button>
+                <button
+                  style="margin-left: 10px"
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                  onclick="handleCreateOrder()"
+                >
+                  Xác nhận đơn hàng
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- modal ShowProduct -->
+        <div
+          class="modal fade"
+          id="ShowProduct"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabindex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                  Thông tin sản phẩm <span id="id-product"></span>
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div id="form">
+                  <div id="DivShowProduct"></div>
+                  <!-- <table>
+                    <thead></thead>
+                    <tfoot id="carts-order"></tfoot>
+                  </table>
+                  <hr />
+                  <h6>Tổng số tiền: <span id="total-order"></span>đ</h6>
+                  <hr />
+                  <br />
+                  <h6>Thông tin giao hàng:</h6>
+                  <label>Điện thoại: </label>
+                  <br />
+                  <input id="phone-order" type="text" />
+                  <br />
+                  <label>Địa chỉ: </label>
+                  <br />
+                  <input id="add-order" type="text" />
+                  <br />
+                  <label>Lưu ý cho người giao hàng: </label>
+                  <br />
+                  <input id="note-order" type="text" />
+                  <br />
+                  <br />
+                  <p id="arletMsg">
+                    Vui lòng kiểm tra kỹ địa chỉ giao hàng trước khi Xác nhận!
+                  </p> -->
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Đóng
+                </button>
+                <button
+                  style="margin-left: 10px"
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                  onclick="handleAddtoCart2()"
+                >
+                  Thêm vào giỏ hàng
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal update info user  -->
+        <div
+          class="modal fade"
+          id="modalUser"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabindex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                  Cập nhật thông tin người dùng
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div id="form">
+                  <label>Tên: </label>
+                  <br />
+                  <input id="user-name-new" type="text" />
+                  <br />
+                  <label>Ngày sinh: </label>
+                  <br />
+                  <input id="user-date-new" type="date" />
+                  <br />
+                  <label>Url ảnh đại diện: </label>
+                  <br />
+                  <input id="user-img-new" type="text" />
+                  <br />
+                  <label>Địa chỉ: </label>
+                  <br />
+                  <input id="user-add-new" type="text" />
+                  <br />
+                  <label>Điện thoại: </label>
+                  <br />
+                  <input id="user-phone-new" type="text" />
+                  <br />
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Đóng
+                </button>
+                <button
+                  style="margin-left: 10px"
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                  onclick="handleSaveUserInfo()"
+                >
+                  Xác nhận thông tin mới
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    renderButtonHeader();
+
+    renderUserInfo();
+    function renderUserInfo() {
+      let imgValue = document.querySelector("#user-img");
+      let nameValue = document.querySelector("#user-name");
+      let emailValue = document.querySelector("#user-email");
+      let dateValue = document.querySelector("#user-date");
+      let addValue = document.querySelector("#user-add");
+      let phoneValue = document.querySelector("#user-phone");
+      const userLogin = JSON.parse(localStorage.getItem("userLogin"));
+
+      imgValue.src = userLogin.img;
+      nameValue.innerHTML = userLogin.name;
+      emailValue.innerHTML = userLogin.email;
+      dateValue.innerHTML = userLogin.date;
+      addValue.innerHTML = userLogin.add;
+      phoneValue.innerHTML = userLogin.phone;
+      console.log(userLogin.img);
+    }
+
+    function handleSaveUserInfo() {
+      let imgValue = document.querySelector("#user-img-new").value;
+      let nameValue = document.querySelector("#user-name-new").value;
+      let dateValue = document.querySelector("#user-date-new").value;
+      let addValue = document.querySelector("#user-add-new").value;
+      let phoneValue = document.querySelector("#user-phone-new").value;
+      let userLogin = JSON.parse(localStorage.getItem("userLogin"));
+
+      const newUser = {
+        email: userLogin.email,
+        password: userLogin.password,
+        name: nameValue,
+        date: dateValue,
+        add: addValue,
+        phone: phoneValue,
+        img: imgValue,
+      };
+
+      let users = JSON.parse(localStorage.getItem("users"));
+      users.forEach((user, i) => {
+        if (user.email == userLogin.email) {
+          users.splice(i, 1, newUser);
+        }
+      });
+      userLogin = newUser;
+      localStorage.setItem("users", JSON.stringify(users));
+      localStorage.removeItem("userLogin");
+      localStorage.setItem("userLogin", JSON.stringify(userLogin));
+      renderUserInfo();
+    }
+
+    function renderModalUser() {
+      let imgValue = document.querySelector("#user-img-new");
+      let nameValue = document.querySelector("#user-name-new");
+      // let emailValue = document.querySelector("#user-email-new");
+      let dateValue = document.querySelector("#user-date-new");
+      let addValue = document.querySelector("#user-add-new");
+      let phoneValue = document.querySelector("#user-phone-new");
+      const userLogin = JSON.parse(localStorage.getItem("userLogin"));
+
+      imgValue.value = userLogin?.img;
+      nameValue.value = userLogin?.name;
+      // emailValue.innerHTML = userLogin?.email;
+      dateValue.value = userLogin?.date;
+      addValue.value = userLogin?.add;
+      phoneValue.value = userLogin?.phone;
+      // console.log(imgValue, nameValue, dateValue);
+    }
+    function renderButtonHeader() {
+      let carts = JSON.parse(localStorage.getItem("carts")) ?? [];
+      let ButtonHeader = document.querySelector("#renderButtonHeader");
+      let contentButton = "";
+      let userLogin = JSON.parse(localStorage.getItem("userLogin"));
+      if (userLogin) {
+        let HelloMsg = userLogin.email;
+        contentButton = `<li class="nav-item">
+                   <button
+                   onclick="UserPage()"
+                   class="btn greyButton"
+                     id="UserPage"
+                     href="#"
+                   >
+                   ${HelloMsg}
+                   </button>
+                 </li>
+                 <li class="nav-item">
+                   <button
+                   class="btn greyButton"
+                     id="UserPage"
+                     href="#"
+        data-bs-toggle="modal" data-bs-target="#modalCarts"
+                     onclick="handleCheckCarts()"
+                   >
+                   Giỏ Hàng (<span color="red" id="cartValue">${carts.length}</span>)
+                   </button>
+                 </li>
+                 <li class="nav-item">
+                   <button onclick="handleLogout()" class="btn btn-Dark" href="#">
+                     Đăng Xuất
+                   </button>
+                 </li>`;
+      } else {
+        contentButton = `<li class="nav-item">
+                   <button
+                     onclick="LoginPage()"
+                     class="btn greyButton"
+                     id="UserPage"
+                     href="#"
+                   >
+                   Đăng nhập
+                   </button>
+                 </li>
+                 <li class="nav-item">
+                   <button
+                   onclick="RegisterPage()"
+
+                   class="btn btn-Dark" href="#">
+                     Đăng ký
+                   </button>
+                 </li>`;
+      }
+
+      ButtonHeader.innerHTML = contentButton;
+    }
+
+    const products = JSON.parse(localStorage.getItem("products"));
+
+    // render product
+    // renderProducts(products);
+    function renderProducts(data) {
+      let mainElement = document.querySelector("main");
+      let contentMain = "";
+      data.forEach((product, index) => {
+        let priceS = addS(product.price);
+        let name = product.name.slice(0, 30) + "...";
+
+        contentMain += `
+                   <div class="product-card" >
+                 <img         data-bs-toggle="modal" data-bs-target="#ShowProduct"
+                  src=${product.img[0]} onclick='handleShowProduct("${product.id}")' onmouseover='handleScreenIMG(this, "${product.img[1]}")' onmouseout='handleScreenIMG2(this, "${product.img[0]}")' alt="hello" class="img-thumb">
+                 <p>${name}</p>
+                 <div  class="PriceButtonSet"><h6>${priceS}<span>đ</span>
+                 </h6> <button class="btn btn-outline-secondary" onclick="handleAddtoCart(${product.id})" >Thêm vào giỏ hàng</button>
+                 </div>
+               </div>
+                   `;
+      });
+      mainElement.innerHTML = contentMain;
+    }
+    function handleScreenIMG(element, imgScreen) {
+      element.src = imgScreen;
+    }
+    function handleScreenIMG2(element, imgScreen) {
+      element.src = imgScreen;
+    }
+
+    // function xử lý số: thêm dấu [space]
+    function addS(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    // function xử lý số: bỏ dấu [.]
+    function removeS(x) {
+      let y = x.toString().replace(".", "");
+      let z = y.toString().replace(".", "");
+      return z.toString().replace(".", "");
+    }
+
+    function handleShowProduct(idInput) {
+      const DivShowProduct = document.querySelector("#DivShowProduct");
+      const IdProduct = document.querySelector("#id-product");
+
+      let products = JSON.parse(localStorage.getItem("products"));
+      let product = {};
+      products.forEach((item) => {
+        if (item.id == idInput) {
+          product = item;
+        }
+      });
+      let priceS = addS(product.price);
+      let contentShowProduct = `
+      <div class="product-card" >
+                 <img         data-bs-toggle="modal" data-bs-target="#ShowProduct"
+ src=${product.img[0]} onclick='handleShowProduct("${product.id}")' onmouseover='handleScreenIMG(this, "${product.img[1]}")' onmouseout='handleScreenIMG2(this, "${product.img[0]}")' alt="hello" class="img-thumb">
+ <br>
+                
+ <h4>${product.name}</h4>
+                 <div  class="PriceButtonSet"><h6>${priceS}<span>đ</span>
+                 </h6> 
+                 <br>
+
+                 <p>${product.description}</p>
+
+                 </div>
+               </div>
+      
+      `;
+      DivShowProduct.innerHTML = contentShowProduct;
+      IdProduct.innerHTML = product.id;
+    }
+    function changepasspage() {
+      window.location = "BuyerChangePass.html";
+    }
+    function handleAddtoCart(idInput) {
+      let userLogin = JSON.parse(localStorage.getItem("userLogin"));
+
+      if (!userLogin) {
+        window.location = "login.html";
+      } else {
+        let products = JSON.parse(localStorage.getItem("products"));
+        let ProductAtc = {};
+        products.forEach((product) => {
+          if (product.id == idInput) {
+            ProductAtc = product;
+            ProductAtc.quantity = 1;
+          }
+        });
+        let flag = 0;
+        let carts = JSON.parse(localStorage.getItem("carts")) ?? [];
+        carts.forEach((cartProduct) => {
+          if (cartProduct.id == ProductAtc.id) {
+            cartProduct["quantity"] += 1;
+            flag = 1;
+          }
+        });
+
+        if (flag == 0) {
+          carts.push(ProductAtc);
+          flag = 1;
+        }
+        localStorage.setItem("carts", JSON.stringify(carts));
+
+        console.log(carts);
+        renderButtonHeader();
+      }
+    }
+
+    function handleAddtoCart2() {
+      const idInput = document.querySelector("#id-product").innerHTML;
+      let userLogin = JSON.parse(localStorage.getItem("userLogin"));
+
+      if (!userLogin) {
+        window.location = "login.html";
+      } else {
+        let products = JSON.parse(localStorage.getItem("products"));
+        let ProductAtc = {};
+        products.forEach((product) => {
+          if (product.id == idInput) {
+            ProductAtc = product;
+            ProductAtc.quantity = 1;
+          }
+        });
+        let flag = 0;
+        let carts = JSON.parse(localStorage.getItem("carts")) ?? [];
+        carts.forEach((cartProduct) => {
+          if (cartProduct.id == ProductAtc.id) {
+            cartProduct["quantity"] += 1;
+            flag = 1;
+          }
+        });
+
+        if (flag == 0) {
+          carts.push(ProductAtc);
+          flag = 1;
+        }
+        localStorage.setItem("carts", JSON.stringify(carts));
+
+        console.log(carts);
+        renderButtonHeader();
+      }
+    }
+
+    function handleSearch() {
+      const inputvalue = document.querySelector("#searchbox").value;
+      // console.log(inputvalue);
+      let products = JSON.parse(localStorage.getItem("products"));
+      let productsSearch = [];
+
+      products.forEach((product) => {
+        if (product.name.toUpperCase().includes(inputvalue.toUpperCase())) {
+          console.log(product);
+          productsSearch.push(product);
+        }
+      });
+      // console.log(productsSearch)
+
+      renderProducts(productsSearch);
+    }
+
+    function handleLogout() {
+      localStorage.removeItem("userLogin");
+      localStorage.removeItem("carts");
+      window.location = "index.html";
+    }
+
+    function UserPage() {
+      window.location = "BuyerPage.html";
+    }
+    function LoginPage() {
+      window.location = "login.html";
+    }
+    function RegisterPage() {
+      window.location = "register.html";
+    }
+
+    function HomePage() {
+      window.location = "index.html";
+    }
+
+    function CatalogNecklace() {
+      window.location = "catalogNecklace.html";
+    }
+
+    function CatalogHomeDecor() {
+      window.location = "catalogHomeDecor.html";
+    }
+
+    function CatalogRing() {
+      window.location = "catalogRing.html";
+    }
+
+    function CatalogEarRings() {
+      window.location = "catalogEarRings.html";
+    }
+
+    function CatalogBracelet() {
+      window.location = "catalogBracelet.html";
+    }
+
+    function handleCheckCarts() {
+      let carts = JSON.parse(localStorage.getItem("carts")) ?? [];
+      renderModal(carts);
+    }
+
+    function renderModal(cartsInput) {
+      let cartsOrderlistElement = document.querySelector("#carts-order");
+      let totalOrderElement = document.querySelector("#total-order");
+
+      let carts = JSON.parse(localStorage.getItem("carts"));
+
+      let contentTfoot = "";
+      let sum = 0;
+
+      carts.forEach((product, i) => {
+        let priceS = addS(product.price);
+
+        contentTfoot += `
+        <tr>
+          <td>${product.id}</td>
+          <td><img src=${product.img[0]}  onmouseover='handleScreenIMG(this, "${product.img[1]}")' onmouseout='handleScreenIMG2(this, "${product.img[0]}")' alt="hello" class="img-icon" /></td>
+          <td>${product.name}</td>
+          <td>(${product.quantity})x</td>
+          <td>${priceS}<span>đ</span></td>
+          <td class="buttonCartSet"><button class="buttonCartA" onclick="AddButtonCart(${product.id},${product.quantity})">+</button><button class="buttonCartB" onclick="SubButtonCart(${product.id},${product.quantity})">-</button></td>
+        </tr>
+        `;
+        sum += Number(product.price * product.quantity);
+      });
+      let sumS = addS(sum);
+
+      cartsOrderlistElement.innerHTML = contentTfoot;
+      totalOrderElement.innerHTML = sumS;
+
+      // totalOrderElement.innerHTML = order?.totalPrice;
+    }
+    function AddButtonCart(productId, productQuantity) {
+      let carts = JSON.parse(localStorage.getItem("carts"));
+      carts.forEach((cartProduct) => {
+        if (cartProduct.id == productId) {
+          cartProduct["quantity"] += 1;
+        }
+      });
+      localStorage.setItem("carts", JSON.stringify(carts));
+
+      renderModal(carts);
+    }
+    function SubButtonCart(productId, productQuantity) {
+      if (productQuantity >= 1) {
+        let carts = JSON.parse(localStorage.getItem("carts"));
+        carts.forEach((cartProduct) => {
+          if (cartProduct.id == productId) {
+            cartProduct["quantity"] -= 1;
+          }
+        });
+        localStorage.setItem("carts", JSON.stringify(carts));
+
+        renderModal(carts);
+      }
+    }
+    function handleCreateOrder() {
+      let userLogin = JSON.parse(localStorage.getItem("userLogin"));
+      let newcarts = JSON.parse(localStorage.getItem("carts"));
+      let orders = JSON.parse(localStorage.getItem("orders"));
+      let total = document.querySelector("#total-order").innerHTML;
+      let totalValue = removeS(total);
+
+      let phoneValue = document.querySelector("#phone-order").value;
+      let addValue = document.querySelector("#add-order").value;
+      let noteValue = document.querySelector("#note-order").value;
+      let newOrder = {
+        id: Number(orders[orders.length - 1]?.id) + 1,
+        date: new Date(),
+        status: 1,
+        carts: newcarts,
+        totalPrice: Number(totalValue),
+        email: userLogin.email,
+        phone: phoneValue,
+        add: addValue,
+        note: noteValue,
+      };
+
+      orders.push(newOrder);
+      localStorage.setItem("orders", JSON.stringify(orders));
+      localStorage.removeItem("carts");
+      renderButtonHeader();
+    }
+    function userManagePage() {
+      window.location = "BuyerPage.html";
+    }
+    function orderManagePage() {
+      window.location = "BuyerOrderPage.html";
+    }
+  </script>
+</html>

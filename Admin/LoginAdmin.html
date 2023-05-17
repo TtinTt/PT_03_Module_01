@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LoginAdmin</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/LoginRegister.css" />
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      form {
+        width: 500px;
+        margin: 50px auto;
+      }
+    </style>
+    <link rel="stylesheet" />
+    <script src="./AdminManage.js"></script>
+  </head>
+  <body>
+    <ul class="nav">
+      <li class="nav-item">
+        <nav class="navbar">
+          <div onclick="HomePage()" class="logo-set-small">
+            <img
+              id="icon-logo"
+              style="width: 30px; height: 30px"
+              src="/imgs/TnG Logo - 50x50.png"
+              alt=""
+            />
+            <h5>HANDMADE TnG</h5>
+          </div>
+        </nav>
+      </li>
+      <nav class="set-header">
+        <li class="navbar"></li>
+        <div id="renderButtonHeader"></div>
+      </nav>
+    </ul>
+    <form>
+      <h3 style="text-align: center; padding: 20px">ĐĂNG NHẬP ADMIN</h3>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          aria-describedby="emailHelp"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Mật khẩu</label>
+        <input type="password" class="form-control" id="password" />
+      </div>
+
+      <p id="Error" style="color: rgb(40, 144, 241); padding: 20px"></p>
+      <div style="text-align: center">
+        <button
+          style="display: inline-block; width: 30%"
+          type="submit"
+          class="btn btn-danger"
+        >
+          Xác nhận
+        </button>
+      </div>
+    </form>
+
+    <script>
+      // Runn ______________________________________________________________________________________________________________________________________________________________________________________________________
+      const form = document.querySelector("form");
+      form.addEventListener("submit", (event) => {
+        // Lỗi thì ngưng chạy
+        event.preventDefault();
+
+        // B2: Lấy thông tin từ form
+        const admin = getDataForm();
+
+        // B3: validate (kiểm tra thông tin)
+        const error = validate(admin);
+        if (error.status) {
+          // render lỗi và kết thúc
+          renderError(error);
+          return;
+        } else {
+          // render không lỗi
+        }
+
+        // B4: Lấy data từ localStorage để kiểm tra trùng lặp
+
+        const adminsDB = JSON.parse(localStorage.getItem("admins")) ?? [];
+
+        //  B5: Kiểm tra email đã đăng ký có trong localStorage
+        let isLogin = false;
+        adminsDB.forEach((item) => {
+          if (
+            item.email.toLowerCase() === admin.email &&
+            item.password === admin.password
+          ) {
+            isLogin = true;
+            admin.Role = item.Role;
+          }
+        });
+
+        if (isLogin) {
+          //   B6: Đẩy dữ liệu lên localStorage
+          localStorage.setItem("adminLogin", JSON.stringify(admin));
+          //   Chuyển sang home
+          window.location = "orderManagePage.html";
+        } else {
+          error.status = true;
+          error.errorMsg =
+            "Email hoặc mật khẩu không chính xác, vui lòng kiểm tra lại";
+          renderError(error);
+        }
+      });
+      // ______________________________________________________________________________________________________________________________________________________________________________________________________
+
+      //   Lấy data từ form
+      function getDataForm() {
+        const emailValue = document.querySelector("#email").value;
+        const passwordValue = document.querySelector("#password").value;
+        return {
+          email: emailValue.toLowerCase(),
+          password: passwordValue,
+        };
+      }
+
+      //   validate info
+      function validate(data) {
+        let error = {
+          status: false,
+          errorMsg: "",
+        };
+
+        if (
+          data.email == ""
+          // ||       (data.password=="")
+        ) {
+          error.status = true;
+          error.errorMsg = "Vui lòng điền email và mật khẩu để đăng nhập";
+        }
+        return error;
+      }
+
+      // Render Error
+      function renderError(error) {
+        const errorValue = document.querySelector("#Error");
+        errorValue.innerHTML = error.errorMsg;
+      }
+      function HomePage() {
+        window.location = "../index.html";
+      }
+    </script>
+  </body>
+</html>
