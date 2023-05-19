@@ -237,10 +237,16 @@ aside h6 {
   width: 100%;
   align-items: center;
   /* border: solid 2px rgb(0, 100, 122); */
-
+  text-align: center;
   /*  */
 }
-
+.main2 input {
+  margin-top: 10px;
+  border: none;
+  background-color: rgb(184, 184, 184);
+  border-radius: 8px;
+  text-align: left;
+}
 .user-info td {
   margin-left: 5px;
   text-align: left !important;
@@ -619,7 +625,10 @@ a {
   text-decoration: none;
 }
 
-a:visited {
+a:visited,
+a:link,
+a:hover,
+a:active {
   color: #8c8c8c;
 }
 
