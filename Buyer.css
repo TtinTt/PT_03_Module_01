@@ -185,9 +185,16 @@ aside h6 {
   font-size: 20px;
   display: inline-block;
 }
+
 .cataloge:hover {
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(231, 231, 231);
   /* color: white; */
+}
+
+.cataloge:hover {
+  letter-spacing: 3px;
+  font-weight: 600;
+  color: white !important;
 }
 
 .cataloge-1 {
