@@ -17,6 +17,9 @@
   margin-bottom: 40px;
   /* background: #ffd8d8; */
 }
+a {
+  text-decoration: none;
+}
 .cataloge-1,
 .cataloge-2,
 .cataloge-3 {
@@ -95,6 +98,13 @@ body {
   padding-top: 80px;
   margin-bottom: 20px;
 }
+.modal-dialog {
+  max-width: var(--bs-modal-width);
+  margin-right: auto;
+  margin-left: auto;
+  margin: auto;
+}
+
 .aside-tag {
   color: #ffffff;
   width: 85%;
@@ -302,7 +312,7 @@ aside h6 {
 .user-info-set2 {
   padding-top: 50px;
   margin: 0 auto;
-  width: 800px;
+  width: 80%;
   /* display: flex;
   flex-wrap: wrap; */
   color: rgb(67, 67, 67);
@@ -697,6 +707,11 @@ a:visited {
   h6 {
     font-size: 20px;
   } */
+
+  #DivShowProduct .img-thumb {
+    width: 400px;
+    height: 500px;
+  }
   .img-thumb {
     width: 280px;
     height: 280px;
@@ -735,6 +750,10 @@ a:visited {
 }
 
 @media screen and (max-width: 850px) {
+  #DivShowProduct .img-thumb {
+    width: 360px;
+    height: 400px;
+  }
   .nav {
     grid-area: nav;
     padding: 4px 0 0 0;
