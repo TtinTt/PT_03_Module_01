@@ -48,4 +48,25 @@
   var today = new Date();
   let time = Days(today, "2023-05-12T19:50:46.415Z");
   console.log(time);
+
+  function toDataURL(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+      var reader = new FileReader();
+      reader.onloadend = function () {
+        callback(reader.result);
+      };
+      reader.readAsDataURL(xhr.response);
+    };
+    xhr.open("GET", url);
+    xhr.responseType = "blob";
+    xhr.send();
+  }
+
+  toDataURL(
+    "https://i.etsystatic.com/12328946/r/il/23bac5/2475493923/il_794xN.2475493923_1mxj.jpg",
+    function (dataUrl) {
+      console.log("RESULT:", dataUrl);
+    }
+  );
 </script>

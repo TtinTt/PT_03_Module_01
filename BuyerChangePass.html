@@ -409,446 +409,453 @@
     </div>
   </body>
   <script>
-    renderButtonHeader();
-
-    renderUserInfo();
-    function renderUserInfo() {
-      let imgValue = document.querySelector("#user-img");
-      // let nameValue = document.querySelector("#user-name");
-      // let emailValue = document.querySelector("#user-email");
-      // let dateValue = document.querySelector("#user-date");
-      // let addValue = document.querySelector("#user-add");
-      // let phoneValue = document.querySelector("#user-phone");
-      const userLogin = JSON.parse(localStorage.getItem("userLogin"));
-
-      imgValue.src = userLogin.img;
-      // nameValue.innerHTML = userLogin.name;
-      // emailValue.innerHTML = userLogin.email;
-      // dateValue.innerHTML = userLogin.date;
-      // addValue.innerHTML = userLogin.add;
-      // phoneValue.innerHTML = userLogin.phone;
-    }
-
-    function handleChangePass() {
-      let userLogin = JSON.parse(localStorage.getItem("userLogin"));
-      let oldPassValue = document.querySelector("#user-old-pass").value;
-      let newPassValue = document.querySelector("#user-new-pass").value;
-      let newPass2Value = document.querySelector("#user-new-pass-2").value;
-      let errorValue = document.querySelector("#Error");
-
-      const error = validate(oldPassValue, newPassValue, newPass2Value);
-      console.log(error);
-
-      if (error.status == true) {
-        errorValue.innerHTML = error.errorMsg;
-        return;
-      }
-      const newUser = {
-        email: userLogin.email,
-        password: newPassValue,
-        name: userLogin.name,
-        date: userLogin.date,
-        add: userLogin.add,
-        phone: userLogin.phone,
-        img: userLogin.img,
-      };
-
-      let users = JSON.parse(localStorage.getItem("users"));
-      users.forEach((user, i) => {
-        if (user.email == userLogin.email) {
-          users.splice(i, 1, newUser);
-        }
-      });
-      userLogin = newUser;
-      localStorage.setItem("users", JSON.stringify(users));
-      localStorage.removeItem("userLogin");
-      localStorage.setItem("userLogin", JSON.stringify(userLogin));
-      window.location = "BuyerPage.html";
-    }
-
-    function validate(oldPassValue, newPassValue, newPass2Value) {
-      const userLogin = JSON.parse(localStorage.getItem("userLogin"));
-      let error = {
-        status: false,
-        errorMsg: "",
-      };
-      if (!(oldPassValue == userLogin.password)) {
-        error.status = true;
-        error.errorMsg = "Mật khẩu cũ không chính xác";
-        return error;
-      } else if (
-        oldPassValue == "" ||
-        newPassValue == "" ||
-        newPass2Value == ""
-      ) {
-        error.status = true;
-        error.errorMsg = "Các thông tin không được để trống";
-        return error;
-      } else if (!(newPassValue === newPass2Value)) {
-        error.status = true;
-        error.errorMsg = "Mật khẩu nhập lại không chính xác";
-        return error;
-      } else if (newPassValue.length < 8) {
-        error.status = true;
-        error.errorMsg = "Mật khẩu không được ngắn hơn 8 ký tự";
-        return error;
-      } else if (
-        !(
-          newPassValue.match(/[a-z]/) &&
-          newPassValue.match(/[A-Z]/) &&
-          newPassValue.match(/\d/)
-        )
-      ) {
-        error.status = true;
-        error.errorMsg =
-          "Mật khẩu cần bao gồm ký tự IN HOA, chữ thường và chữ số";
-        return error;
-      }
-      return error;
-    }
-    function handleSaveUserInfo() {
-      let imgValue = document.querySelector("#user-img-new").value;
-      let nameValue = document.querySelector("#user-name-new").value;
-      let dateValue = document.querySelector("#user-date-new").value;
-      let addValue = document.querySelector("#user-add-new").value;
-      let phoneValue = document.querySelector("#user-phone-new").value;
-      let userLogin = JSON.parse(localStorage.getItem("userLogin"));
-
-      const newUser = {
-        email: userLogin.email,
-        password: userLogin.password,
-        name: nameValue,
-        date: dateValue,
-        add: addValue,
-        phone: phoneValue,
-        img: imgValue,
-      };
-
-      let users = JSON.parse(localStorage.getItem("users"));
-      users.forEach((user, i) => {
-        if (user.email == userLogin.email) {
-          users.splice(i, 1, newUser);
-        }
-      });
-      userLogin = newUser;
-      localStorage.setItem("users", JSON.stringify(users));
-      localStorage.removeItem("userLogin");
-      localStorage.setItem("userLogin", JSON.stringify(userLogin));
-      renderUserInfo();
-    }
-
-    function renderModalUser() {
-      let imgValue = document.querySelector("#user-img-new");
-      let nameValue = document.querySelector("#user-name-new");
-      // let emailValue = document.querySelector("#user-email-new");
-      let dateValue = document.querySelector("#user-date-new");
-      let addValue = document.querySelector("#user-add-new");
-      let phoneValue = document.querySelector("#user-phone-new");
-      const userLogin = JSON.parse(localStorage.getItem("userLogin"));
-
-      imgValue.value = userLogin?.img;
-      nameValue.value = userLogin?.name;
-      // emailValue.innerHTML = userLogin?.email;
-      dateValue.value = userLogin?.date;
-      addValue.value = userLogin?.add;
-      phoneValue.value = userLogin?.phone;
-      // console.log(imgValue, nameValue, dateValue);
-    }
-    function renderButtonHeader() {
-      let carts = JSON.parse(localStorage.getItem("carts")) ?? [];
-      let ButtonHeader = document.querySelector("#renderButtonHeader");
-      let contentButton = "";
-      let userLogin = JSON.parse(localStorage.getItem("userLogin"));
-      if (userLogin) {
-        let HelloMsg = userLogin.email;
-        contentButton = `<li class="nav-item">
-                      <button
-                      onclick="UserPage()"
-                      class="btn greyButton"
-                        id="UserPage"
-                        href="#"
-                      >
-                      ${HelloMsg}
-                      </button>
-                    </li>
-                    <li class="nav-item">
-                      <button
-                      class="btn greyButton"
-                        id="UserPage"
-                        href="#"
-           data-bs-toggle="modal" data-bs-target="#modalCarts"
-                        onclick="handleCheckCarts()"
-                      >
-                      Giỏ Hàng (<span color="red" id="cartValue">${carts.length}</span>)
-                      </button>
-                    </li>
-                    <li class="nav-item">
-                      <button onclick="handleLogout()" class="btn btn-Dark" href="#">
-                        Đăng Xuất
-                      </button>
-                    </li>`;
-      } else {
-        contentButton = `<li class="nav-item">
-                      <button
-                        onclick="LoginPage()"
-                        class="btn greyButton"
-                        id="UserPage"
-                        href="#"
-                      >
-                      Đăng nhập
-                      </button>
-                    </li>
-                    <li class="nav-item">
-                      <button
-                      onclick="RegisterPage()"
-
-                      class="btn btn-Dark" href="#">
-                        Đăng ký
-                      </button>
-                    </li>`;
-      }
-
-      ButtonHeader.innerHTML = contentButton;
-    }
-
-    const products = JSON.parse(localStorage.getItem("products"));
-
-    // render product
-    // renderProducts(products);
-    function renderProducts(data) {
-      let mainElement = document.querySelector("main");
-      let contentMain = "";
-      data.forEach((product, index) => {
-        let priceS = addS(product.price);
-        let name = product.name.slice(0, 30) + "...";
-
-        contentMain += `
-                      <div class="product-card" >
-                    <img         data-bs-toggle="modal" data-bs-target="#ShowProduct"
-                     src=${product.img[0]} onclick='handleShowProduct("${product.id}")' onmouseover='handleScreenIMG(this, "${product.img[1]}")' onmouseout='handleScreenIMG2(this, "${product.img[0]}")' alt="hello" class="img-thumb">
-                    <p>${name}</p>
-                    <div  class="PriceButtonSet"><h6>${priceS}<span>đ</span>
-                    </h6> <button class="btn btn-outline-secondary" onclick="handleAddtoCart(${product.id})" >Thêm vào giỏ hàng</button>
-                    </div>
-                  </div>
-                      `;
-      });
-      mainElement.innerHTML = contentMain;
-    }
-    function handleScreenIMG(element, imgScreen) {
-      element.src = imgScreen;
-    }
-    function handleScreenIMG2(element, imgScreen) {
-      element.src = imgScreen;
-    }
-
-    // function xử lý số: thêm dấu [space]
-    function addS(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    }
-
-    // function xử lý số: bỏ dấu [.]
-    function removeS(x) {
-      let y = x.toString().replace(".", "");
-      let z = y.toString().replace(".", "");
-      return z.toString().replace(".", "");
-    }
-
-    function handleShowProduct(idInput) {
-      const DivShowProduct = document.querySelector("#DivShowProduct");
-      const IdProduct = document.querySelector("#id-product");
-
-      let products = JSON.parse(localStorage.getItem("products"));
-      let product = {};
-      products.forEach((item) => {
-        if (item.id == idInput) {
-          product = item;
-        }
-      });
-      let priceS = addS(product.price);
-      let contentShowProduct = `
-         <div class="product-card" >
-                    <img         data-bs-toggle="modal" data-bs-target="#ShowProduct"
-    src=${product.img[0]} onclick='handleShowProduct("${product.id}")' onmouseover='handleScreenIMG(this, "${product.img[1]}")' onmouseout='handleScreenIMG2(this, "${product.img[0]}")' alt="hello" class="img-thumb">
-    <br>
-
-    <h4>${product.name}</h4>
-                    <div  class="PriceButtonSet"><h6>${priceS}<span>đ</span>
-                    </h6>
-                    <br>
-
-                    <p>${product.description}</p>
-
-                    </div>
-                  </div>
-
-         `;
-      DivShowProduct.innerHTML = contentShowProduct;
-      IdProduct.innerHTML = product.id;
-    }
-
-    function handleAddtoCart(idInput) {
-      let userLogin = JSON.parse(localStorage.getItem("userLogin"));
-
-      if (!userLogin) {
-        window.location = "login.html";
-      } else {
-        let products = JSON.parse(localStorage.getItem("products"));
-        let ProductAtc = {};
-        products.forEach((product) => {
-          if (product.id == idInput) {
-            ProductAtc = product;
-            ProductAtc.quantity = 1;
-          }
-        });
-        let flag = 0;
-        let carts = JSON.parse(localStorage.getItem("carts")) ?? [];
-        carts.forEach((cartProduct) => {
-          if (cartProduct.id == ProductAtc.id) {
-            cartProduct["quantity"] += 1;
-            flag = 1;
-          }
-        });
-
-        if (flag == 0) {
-          carts.push(ProductAtc);
-          flag = 1;
-        }
-        localStorage.setItem("carts", JSON.stringify(carts));
-
-        console.log(carts);
         renderButtonHeader();
-      }
-    }
 
-    function handleAddtoCart2() {
-      const idInput = document.querySelector("#id-product").innerHTML;
-      let userLogin = JSON.parse(localStorage.getItem("userLogin"));
+        renderUserInfo();
+        function renderUserInfo() {
+          let imgValue = document.querySelector("#user-img");
+          // let nameValue = document.querySelector("#user-name");
+          // let emailValue = document.querySelector("#user-email");
+          // let dateValue = document.querySelector("#user-date");
+          // let addValue = document.querySelector("#user-add");
+          // let phoneValue = document.querySelector("#user-phone");
+          const userLogin = JSON.parse(localStorage.getItem("userLogin"));
 
-      if (!userLogin) {
-        window.location = "login.html";
-      } else {
-        let products = JSON.parse(localStorage.getItem("products"));
-        let ProductAtc = {};
-        products.forEach((product) => {
-          if (product.id == idInput) {
-            ProductAtc = product;
-            ProductAtc.quantity = 1;
-          }
-        });
-        let flag = 0;
-        let carts = JSON.parse(localStorage.getItem("carts")) ?? [];
-        carts.forEach((cartProduct) => {
-          if (cartProduct.id == ProductAtc.id) {
-            cartProduct["quantity"] += 1;
-            flag = 1;
-          }
-        });
-
-        if (flag == 0) {
-          carts.push(ProductAtc);
-          flag = 1;
+          imgValue.src = userLogin.img;
+          // nameValue.innerHTML = userLogin.name;
+          // emailValue.innerHTML = userLogin.email;
+          // dateValue.innerHTML = userLogin.date;
+          // addValue.innerHTML = userLogin.add;
+          // phoneValue.innerHTML = userLogin.phone;
         }
-        localStorage.setItem("carts", JSON.stringify(carts));
 
-        console.log(carts);
-        renderButtonHeader();
-      }
-    }
+        function handleChangePass() {
+          let userLogin = JSON.parse(localStorage.getItem("userLogin"));
+          let oldPassValue = document.querySelector("#user-old-pass").value;
+          let newPassValue = document.querySelector("#user-new-pass").value;
+          let newPass2Value = document.querySelector("#user-new-pass-2").value;
+          let errorValue = document.querySelector("#Error");
 
-    function handleSearch() {
-      const inputvalue = document.querySelector("#searchbox").value;
-      // console.log(inputvalue);
-      let products = JSON.parse(localStorage.getItem("products"));
-      let productsSearch = [];
+          const error = validate(oldPassValue, newPassValue, newPass2Value);
+          console.log(error);
 
-      products.forEach((product) => {
-        if (product.name.toUpperCase().includes(inputvalue.toUpperCase())) {
-          console.log(product);
-          productsSearch.push(product);
+          if (error.status == true) {
+            errorValue.innerHTML = error.errorMsg;
+            return;
+          }
+          const newUser = {
+            email: userLogin.email,
+            password: newPassValue,
+            name: userLogin.name,
+            date: userLogin.date,
+            add: userLogin.add,
+            phone: userLogin.phone,
+            img: userLogin.img,
+          };
+
+          let users = JSON.parse(localStorage.getItem("users"));
+          users.forEach((user, i) => {
+            if (user.email == userLogin.email) {
+              users.splice(i, 1, newUser);
+            }
+          });
+          userLogin = newUser;
+          localStorage.setItem("users", JSON.stringify(users));
+          localStorage.removeItem("userLogin");
+          localStorage.setItem("userLogin", JSON.stringify(userLogin));
+          window.location = "BuyerPage.html";
         }
-      });
-      // console.log(productsSearch)
 
-      renderProducts(productsSearch);
-    }
+        function validate(oldPassValue, newPassValue, newPass2Value) {
+          const userLogin = JSON.parse(localStorage.getItem("userLogin"));
+          let error = {
+            status: false,
+            errorMsg: "",
+          };
+          if (!(oldPassValue == userLogin.password)) {
+            error.status = true;
+            error.errorMsg = "Mật khẩu cũ không chính xác";
+            return error;
+          } else if (
+            oldPassValue == "" ||
+            newPassValue == "" ||
+            newPass2Value == ""
+          ) {
+            error.status = true;
+            error.errorMsg = "Các thông tin không được để trống";
+            return error;
+          } else if (!(newPassValue === newPass2Value)) {
+            error.status = true;
+            error.errorMsg = "Mật khẩu nhập lại không chính xác";
+            return error;
+          } else if (newPassValue.length < 8) {
+            error.status = true;
+            error.errorMsg = "Mật khẩu không được ngắn hơn 8 ký tự";
+            return error;
+          } else if (
+            !(
+              newPassValue.match(/[a-z]/) &&
+              newPassValue.match(/[A-Z]/) &&
+              newPassValue.match(/\d/)
+            )
+          ) {
+            error.status = true;
+            error.errorMsg =
+              "Mật khẩu cần bao gồm ký tự IN HOA, chữ thường và chữ số";
+            return error;
+          }
+          return error;
+        }
+        function handleSaveUserInfo() {
+          let imgValue = document.querySelector("#user-img-new").value;
+          let nameValue = document.querySelector("#user-name-new").value;
+          let dateValue = document.querySelector("#user-date-new").value;
+          let addValue = document.querySelector("#user-add-new").value;
+          let phoneValue = document.querySelector("#user-phone-new").value;
+          let userLogin = JSON.parse(localStorage.getItem("userLogin"));
 
-    function handleLogout() {
-      localStorage.removeItem("userLogin");
-      localStorage.removeItem("carts");
-      window.location = "index.html";
-    }
+          const newUser = {
+            email: userLogin.email,
+            password: userLogin.password,
+            name: nameValue,
+            date: dateValue,
+            add: addValue,
+            phone: phoneValue,
+            img: imgValue,
+          };
 
-    function UserPage() {
-      window.location = "BuyerPage.html";
-    }
-    function LoginPage() {
-      window.location = "login.html";
-    }
-    function RegisterPage() {
-      window.location = "register.html";
-    }
+          let users = JSON.parse(localStorage.getItem("users"));
+          users.forEach((user, i) => {
+            if (user.email == userLogin.email) {
+              users.splice(i, 1, newUser);
+            }
+          });
+          userLogin = newUser;
+          localStorage.setItem("users", JSON.stringify(users));
+          localStorage.removeItem("userLogin");
+          localStorage.setItem("userLogin", JSON.stringify(userLogin));
+          renderUserInfo();
+        }
 
-    function HomePage() {
-      window.location = "index.html";
-    }
+        function renderModalUser() {
+          let imgValue = document.querySelector("#user-img-new");
+          let nameValue = document.querySelector("#user-name-new");
+          // let emailValue = document.querySelector("#user-email-new");
+          let dateValue = document.querySelector("#user-date-new");
+          let addValue = document.querySelector("#user-add-new");
+          let phoneValue = document.querySelector("#user-phone-new");
+          const userLogin = JSON.parse(localStorage.getItem("userLogin"));
 
-    function CatalogNecklace() {
-      window.location = "catalogNecklace.html";
-    }
+          imgValue.value = userLogin?.img;
+          nameValue.value = userLogin?.name;
+          // emailValue.innerHTML = userLogin?.email;
+          dateValue.value = userLogin?.date;
+          addValue.value = userLogin?.add;
+          phoneValue.value = userLogin?.phone;
+          // console.log(imgValue, nameValue, dateValue);
+        }
+        function renderButtonHeader() {
+          let carts = JSON.parse(localStorage.getItem("carts")) ?? [];
+          let ButtonHeader = document.querySelector("#renderButtonHeader");
+          let contentButton = "";
+          let userLogin = JSON.parse(localStorage.getItem("userLogin"));
+          if (userLogin) {
+            let HelloMsg = userLogin.email;
+            contentButton = `<li class="nav-item">
+                          <button
+                          onclick="UserPage()"
+                          class="btn greyButton"
+                            id="UserPage"
+                            href="#"
+                          >
+                          ${HelloMsg}
+                          </button>
+                        </li>
+                        <li class="nav-item">
+                          <button
+                          class="btn greyButton"
+                            id="UserPage"
+                            href="#"
+               data-bs-toggle="modal" data-bs-target="#modalCarts"
+                            onclick="handleCheckCarts()"
+                          >
+                          Giỏ Hàng <span color="red" id="cartValue">${carts.length}</span>
+                          </button>
+                        </li>
+                        <li class="nav-item">
+                          <button onclick="handleLogout()" class="btn btn-Dark" href="#">
+                            Đăng Xuất
+                          </button>
+                        </li>`;
+          } else {
+            contentButton = `<li class="nav-item">
+                          <button
+                            onclick="LoginPage()"
+                            class="btn greyButton"
+                            id="UserPage"
+                            href="#"
+                          >
+                          Đăng nhập
+                          </button>
+                        </li>
+                        <li class="nav-item">
+                          <button
+                          onclick="RegisterPage()"
 
-    function CatalogHomeDecor() {
-      window.location = "catalogHomeDecor.html";
-    }
+                          class="btn btn-Dark" href="#">
+                            Đăng ký
+                          </button>
+                        </li>`;
+          }
 
-    function CatalogRing() {
-      window.location = "catalogRing.html";
-    }
+          ButtonHeader.innerHTML = contentButton;
+        }
 
-    function CatalogEarRings() {
-      window.location = "catalogEarRings.html";
-    }
+        const products = JSON.parse(localStorage.getItem("products"));
 
-    function CatalogBracelet() {
-      window.location = "catalogBracelet.html";
-    }
+        // render product
+        // renderProducts(products);
+        function renderProducts(data) {
+          let mainElement = document.querySelector("main");
+          let contentMain = "";
+          data.forEach((product, index) => {
+            let priceS = addS(product.price);
+            let name = product.name.slice(0, 30) + "...";
 
-    function handleCheckCarts() {
-      let carts = JSON.parse(localStorage.getItem("carts")) ?? [];
-      renderModal(carts);
-    }
+            contentMain += `
+                          <div class="product-card" >
+                        <img         data-bs-toggle="modal" data-bs-target="#ShowProduct"
+                         src=${product.img[0]} onclick='handleShowProduct("${product.id}")' onmouseover='handleScreenIMG(this, "${product.img[1]}")' onmouseout='handleScreenIMG2(this, "${product.img[0]}")' alt="hello" class="img-thumb">
+                        <p>${name}</p>
+                        <div  class="PriceButtonSet"><h6>${priceS}<span>đ</span>
+                        </h6> <button class="btn btn-outline-secondary" onclick="handleAddtoCart(${product.id})" >Thêm vào giỏ hàng</button>
+                        </div>
+                      </div>
+                          `;
+          });
+          mainElement.innerHTML = contentMain;
+        }
+        function handleScreenIMG(element, imgScreen) {
+          element.src = imgScreen;
+        }
+        function handleScreenIMG2(element, imgScreen) {
+          element.src = imgScreen;
+        }
 
-    function renderModal(cartsInput) {
-      let cartsOrderlistElement = document.querySelector("#carts-order");
-      let totalOrderElement = document.querySelector("#total-order");
+        // function xử lý số: thêm dấu [space]
+        function addS(x) {
+          return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
 
-      let carts = JSON.parse(localStorage.getItem("carts"));
+        // function xử lý số: bỏ dấu [.]
+        function removeS(x) {
+          let y = x.toString().replace(".", "");
+          let z = y.toString().replace(".", "");
+          return z.toString().replace(".", "");
+        }
 
-      let contentTfoot = "";
-      let sum = 0;
+        function handleShowProduct(idInput) {
+          const DivShowProduct = document.querySelector("#DivShowProduct");
+          const IdProduct = document.querySelector("#id-product");
 
-      carts.forEach((product, i) => {
-        let priceS = addS(product.price);
+          let products = JSON.parse(localStorage.getItem("products"));
+          let product = {};
+          products.forEach((item) => {
+            if (item.id == idInput) {
+              product = item;
+            }
+          });
+          let priceS = addS(product.price);
+          let contentShowProduct = `
+             <div class="product-card" >
+                        <img         data-bs-toggle="modal" data-bs-target="#ShowProduct"
+        src=${product.img[0]} onclick='handleShowProduct("${product.id}")' onmouseover='handleScreenIMG(this, "${product.img[1]}")' onmouseout='handleScreenIMG2(this, "${product.img[0]}")' alt="hello" class="img-thumb">
+        <br>
 
-        contentTfoot += `
-           <tr>
-             <td>${product.id}</td>
-             <td><img src=${product.img[0]}  onmouseover='handleScreenIMG(this, "${product.img[1]}")' onmouseout='handleScreenIMG2(this, "${product.img[0]}")' alt="hello" class="img-icon" /></td>
-             <td>${product.name}</td>
-             <td>(${product.quantity})x</td>
-             <td>${priceS}<span>đ</span></td>
-             <td class="buttonCartSet"><button class="buttonCartA" onclick="AddButtonCart(${product.id},${product.quantity})">+</button><button class="buttonCartB" onclick="SubButtonCart(${product.id},${product.quantity})">-</button></td>
-           </tr>
-           `;
-        sum += Number(product.price * product.quantity);
-      });
-      let sumS = addS(sum);
+        <h4>${product.name}</h4>
+                        <div  class="PriceButtonSet"><h6>${priceS}<span>đ</span>
+                        </h6>
+                        <br>
 
-      cartsOrderlistElement.innerHTML = contentTfoot;
-      totalOrderElement.innerHTML = sumS;
+                        <p>${product.description}</p>
 
-      // totalOrderElement.innerHTML = order?.totalPrice;
-    }
+                        </div>
+                      </div>
+
+             `;
+          DivShowProduct.innerHTML = contentShowProduct;
+          IdProduct.innerHTML = product.id;
+        }
+
+        function handleAddtoCart(idInput) {
+          let userLogin = JSON.parse(localStorage.getItem("userLogin"));
+
+          if (!userLogin) {
+            window.location = "login.html";
+          } else {
+            let products = JSON.parse(localStorage.getItem("products"));
+            let ProductAtc = {};
+            products.forEach((product) => {
+              if (product.id == idInput) {
+                ProductAtc = product;
+                ProductAtc.quantity = 1;
+              }
+            });
+            let flag = 0;
+            let carts = JSON.parse(localStorage.getItem("carts")) ?? [];
+            carts.forEach((cartProduct) => {
+              if (cartProduct.id == ProductAtc.id) {
+                cartProduct["quantity"] += 1;
+                flag = 1;
+              }
+            });
+
+            if (flag == 0) {
+              carts.push(ProductAtc);
+              flag = 1;
+            }
+            localStorage.setItem("carts", JSON.stringify(carts));
+
+            console.log(carts);
+            renderButtonHeader();
+          }
+        }
+
+        function handleAddtoCart2() {
+          const idInput = document.querySelector("#id-product").innerHTML;
+          let userLogin = JSON.parse(localStorage.getItem("userLogin"));
+
+          if (!userLogin) {
+            window.location = "login.html";
+          } else {
+            let products = JSON.parse(localStorage.getItem("products"));
+            let ProductAtc = {};
+            products.forEach((product) => {
+              if (product.id == idInput) {
+                ProductAtc = product;
+                ProductAtc.quantity = 1;
+              }
+            });
+            let flag = 0;
+            let carts = JSON.parse(localStorage.getItem("carts")) ?? [];
+            carts.forEach((cartProduct) => {
+              if (cartProduct.id == ProductAtc.id) {
+                cartProduct["quantity"] += 1;
+                flag = 1;
+              }
+            });
+
+            if (flag == 0) {
+              carts.push(ProductAtc);
+              flag = 1;
+            }
+            localStorage.setItem("carts", JSON.stringify(carts));
+
+            console.log(carts);
+            renderButtonHeader();
+          }
+        }
+
+        function handleSearch() {
+          const inputvalue = document.querySelector("#searchbox").value;
+          // console.log(inputvalue);
+          let products = JSON.parse(localStorage.getItem("products"));
+          let productsSearch = [];
+
+          products.forEach((product) => {
+            if (
+              removeAccents(product.name)
+                .toUpperCase()
+                .includes(removeAccents(inputvalue).toUpperCase())
+            ) {
+              console.log(product);
+              productsSearch.push(product);
+            }
+          });
+          // console.log(productsSearch)
+
+          renderProducts(productsSearch);
+        }
+
+        function handleLogout() {
+          localStorage.removeItem("userLogin");
+          localStorage.removeItem("carts");
+          window.location = "index.html";
+        }
+
+        function UserPage() {
+          window.location = "BuyerPage.html";
+        }
+        function LoginPage() {
+          window.location = "login.html";
+        }
+        function RegisterPage() {
+          window.location = "register.html";
+        }
+
+        function HomePage() {
+          window.location = "index.html";
+        }
+
+        function CatalogNecklace() {
+          window.location = "catalogNecklace.html";
+        }
+
+        function CatalogHomeDecor() {
+          window.location = "catalogHomeDecor.html";
+        }
+
+        function CatalogRing() {
+          window.location = "catalogRing.html";
+        }
+
+        function CatalogEarRings() {
+          window.location = "catalogEarRings.html";
+        }
+
+        function CatalogBracelet() {
+          window.location = "catalogBracelet.html";
+        }
+
+        function handleCheckCarts() {
+          let carts = JSON.parse(localStorage.getItem("carts")) ?? [];
+          renderModal(carts);
+        }
+
+        function renderModal(cartsInput) {
+          let cartsOrderlistElement = document.querySelector("#carts-order");
+          let totalOrderElement = document.querySelector("#total-order");
+
+          let carts = JSON.parse(localStorage.getItem("carts"));
+
+          let contentTfoot = "";
+          let sum = 0;
+
+          carts.forEach((product, i) => {
+            let priceS = addS(product.price);
+
+            contentTfoot += `
+               <tr>
+                 <td>${product.id}</td>
+                 <td><img src=${product.img[0]}  onmouseover='handleScreenIMG(this, "${product.img[1]}")' onmouseout='handleScreenIMG2(this, "${product.img[0]}")' alt="hello" class="img-icon" /></td>
+                 <td>${product.name}</td>
+                 <td>(${product.quantity})x</td>
+                 <td>${priceS}<span>đ</span></td>
+                 <td class="buttonCartSet"><button class="buttonCartA" onclick="AddButtonCart(${product.id},${product.quantity})">+</button><button class="buttonCartB" onclick="SubButtonCart(${product.id},${product.quantity})">-</button></td>
+               </tr>
+               `;
+            sum += Number(product.price * product.quantity);
+          });
+          let sumS = addS(sum);
+
+          cartsOrderlistElement.innerHTML = contentTfoot;
+          totalOrderElement.innerHTML = sumS;
+
+          // totalOrderElement.innerHTML = order?.totalPrice;
+        }
+        function SubButtonCart(productId, productQuantity)
+
+
     function AddButtonCart(productId, productQuantity) {
       let carts = JSON.parse(localStorage.getItem("carts"));
       carts.forEach((cartProduct) => {
@@ -857,11 +864,12 @@
         }
       });
       localStorage.setItem("carts", JSON.stringify(carts));
+      renderButtonHeader();
 
       renderModal(carts);
     }
     function SubButtonCart(productId, productQuantity) {
-      if (productQuantity >= 1) {
+      if (productQuantity > 1) {
         let carts = JSON.parse(localStorage.getItem("carts"));
         carts.forEach((cartProduct) => {
           if (cartProduct.id == productId) {
@@ -869,42 +877,61 @@
           }
         });
         localStorage.setItem("carts", JSON.stringify(carts));
+        renderButtonHeader();
 
+        renderModal(carts);
+      } else {
+        let carts = JSON.parse(localStorage.getItem("carts"));
+        carts.forEach((cartProduct, i) => {
+          if (cartProduct.id == productId) {
+            carts.splice(i, 1);
+          }
+        });
+        localStorage.setItem("carts", JSON.stringify(carts));
+        renderButtonHeader();
         renderModal(carts);
       }
     }
-    function handleCreateOrder() {
-      let userLogin = JSON.parse(localStorage.getItem("userLogin"));
-      let newcarts = JSON.parse(localStorage.getItem("carts"));
-      let orders = JSON.parse(localStorage.getItem("orders"));
-      let total = document.querySelector("#total-order").innerHTML;
-      let totalValue = removeS(total);
+        function handleCreateOrder() {
+          let userLogin = JSON.parse(localStorage.getItem("userLogin"));
+          let newcarts = JSON.parse(localStorage.getItem("carts"));
+          let orders = JSON.parse(localStorage.getItem("orders"));
+          let total = document.querySelector("#total-order").innerHTML;
+          let totalValue = removeS(total);
 
-      let phoneValue = document.querySelector("#phone-order").value;
-      let addValue = document.querySelector("#add-order").value;
-      let noteValue = document.querySelector("#note-order").value;
-      let newOrder = {
-        id: Number(orders[orders.length - 1]?.id) + 1,
-        date: new Date(),
-        status: 1,
-        carts: newcarts,
-        totalPrice: Number(totalValue),
-        email: userLogin.email,
-        phone: phoneValue,
-        add: addValue,
-        note: noteValue,
-      };
+          let phoneValue = document.querySelector("#phone-order").value;
+          let addValue = document.querySelector("#add-order").value;
+          let noteValue = document.querySelector("#note-order").value;
+          let newOrder = {
+            id: Number(orders[orders.length - 1]?.id) + 1,
+            date: new Date(),
+            status: 1,
+            carts: newcarts,
+            totalPrice: Number(totalValue),
+            email: userLogin.email,
+            phone: phoneValue,
+            add: addValue,
+            note: noteValue,
+          };
 
-      orders.push(newOrder);
-      localStorage.setItem("orders", JSON.stringify(orders));
-      localStorage.removeItem("carts");
-      renderButtonHeader();
-    }
-    function userManagePage() {
-      window.location = "BuyerPage.html";
-    }
-    function orderManagePage() {
-      window.location = "BuyerOrderPage.html";
-    }
+          orders.push(newOrder);
+          localStorage.setItem("orders", JSON.stringify(orders));
+          localStorage.removeItem("carts");
+          renderButtonHeader();
+        }
+        function userManagePage() {
+          window.location = "BuyerPage.html";
+        }
+        function orderManagePage() {
+          window.location = "BuyerOrderPage.html";
+        }
+
+        function removeAccents(str) {
+          return str
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/đ/g, "d")
+            .replace(/Đ/g, "D");
+        }
   </script>
 </html>

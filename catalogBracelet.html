@@ -319,7 +319,7 @@
         data-bs-toggle="modal" data-bs-target="#modalCarts"
                      onclick="handleCheckCarts()"
                    >
-                   Giỏ Hàng (<span color="red" id="cartValue">${carts.length}</span>)
+                   Giỏ Hàng <span color="red" id="cartValue">${carts.length}</span>
                    </button>
                  </li>
                  <li class="nav-item">
@@ -511,7 +511,11 @@
       let productsSearch = [];
 
       products.forEach((product) => {
-        if (product.name.toUpperCase().includes(inputvalue.toUpperCase())) {
+        if (
+          removeAccents(product.name)
+            .toUpperCase()
+            .includes(removeAccents(inputvalue).toUpperCase())
+        ) {
           console.log(product);
           productsSearch.push(product);
         }
@@ -597,6 +601,7 @@
 
       // totalOrderElement.innerHTML = order?.totalPrice;
     }
+
     function AddButtonCart(productId, productQuantity) {
       let carts = JSON.parse(localStorage.getItem("carts"));
       carts.forEach((cartProduct) => {
@@ -605,11 +610,12 @@
         }
       });
       localStorage.setItem("carts", JSON.stringify(carts));
+      renderButtonHeader();
 
       renderModal(carts);
     }
     function SubButtonCart(productId, productQuantity) {
-      if (productQuantity >= 1) {
+      if (productQuantity > 1) {
         let carts = JSON.parse(localStorage.getItem("carts"));
         carts.forEach((cartProduct) => {
           if (cartProduct.id == productId) {
@@ -617,7 +623,18 @@
           }
         });
         localStorage.setItem("carts", JSON.stringify(carts));
+        renderButtonHeader();
 
+        renderModal(carts);
+      } else {
+        let carts = JSON.parse(localStorage.getItem("carts"));
+        carts.forEach((cartProduct, i) => {
+          if (cartProduct.id == productId) {
+            carts.splice(i, 1);
+          }
+        });
+        localStorage.setItem("carts", JSON.stringify(carts));
+        renderButtonHeader();
         renderModal(carts);
       }
     }
@@ -647,6 +664,13 @@
       localStorage.setItem("orders", JSON.stringify(orders));
       localStorage.removeItem("carts");
       renderButtonHeader();
+    }
+    function removeAccents(str) {
+      return str
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/đ/g, "d")
+        .replace(/Đ/g, "D");
     }
   </script>
 </html>

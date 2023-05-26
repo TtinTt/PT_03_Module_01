@@ -508,7 +508,11 @@
       let productsSearch = [];
 
       products.forEach((product) => {
-        if (product.name.toUpperCase().includes(inputvalue.toUpperCase())) {
+        if (
+          removeAccents(product.name)
+            .toUpperCase()
+            .includes(removeAccents(inputvalue).toUpperCase())
+        ) {
           console.log(product);
           productsSearch.push(product);
         }
@@ -704,6 +708,14 @@
     }
     function HomePage() {
       window.location = "../index.html";
+    }
+
+    function removeAccents(str) {
+      return str
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/đ/g, "d")
+        .replace(/Đ/g, "D");
     }
   </script>
 </html>

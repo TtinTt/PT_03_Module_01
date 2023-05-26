@@ -3,7 +3,7 @@
   padding: 0;
 }
 #groupCatalog {
-  padding-top: 30px;
+  padding-top: 80px;
   grid-area: cataloge;
   width: 1310px;
   display: grid;
@@ -45,7 +45,12 @@ body {
   /* margin: auto; */
   /* text-align: center; */
 }
-
+#cartValue {
+  background: #6e0000 !important;
+  border-radius: 20px;
+  padding: 0 6px;
+  text-align: center;
+}
 .page {
   display: grid;
   grid-area: page;
@@ -136,11 +141,11 @@ aside h6 {
 #catalogName {
   grid-area: cataloge;
   text-align: center;
-  padding-top: 30px;
+  padding-top: 80px;
   color: #b6b6b6;
   font-size: 60px;
   /* font-weight: 400; */
-  padding-top: 10px;
+  /* padding-top: 10px; */
   letter-spacing: 12px;
 }
 #pageName {
@@ -153,6 +158,21 @@ aside h6 {
   /* font-weight: 400; */
   letter-spacing: 12px;
   width: 100%;
+}
+.cataloge:hover {
+  letter-spacing: 4px;
+  font-weight: 600;
+  /* color: rgb(232, 232, 232) !important; */
+  background-color: #ececec;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+.cataloge {
+  text-align: center;
+  letter-spacing: 0px;
+  /* border: #ffffff 2px solid; */
+  /* margin: -2px; */
 }
 
 .cataloge-A {
@@ -184,17 +204,6 @@ aside h6 {
   color: gray;
   font-size: 20px;
   display: inline-block;
-}
-
-.cataloge:hover {
-  background-color: rgb(231, 231, 231);
-  /* color: white; */
-}
-
-.cataloge:hover {
-  letter-spacing: 3px;
-  font-weight: 600;
-  color: white !important;
 }
 
 .cataloge-1 {
@@ -420,7 +429,7 @@ h6 {
   flex-wrap: nowrap;
   justify-content: space-between;
   width: 100%;
-  /* position: fixed; */
+  position: fixed;
 }
 
 .form-control:focus {
@@ -693,10 +702,11 @@ a:active {
     padding-top: 10px;
 
     margin-bottom: 20px;
-    /* position: fixed; */
+    position: fixed;
   }
   #catalogName {
     font-size: 30px;
+    padding-top: 130px;
   }
 
   .set-header {
@@ -761,6 +771,8 @@ a:active {
     width: 280px;
   }
   #groupCatalog {
+    padding-top: 130px;
+
     width: 860px;
   }
 }
@@ -769,6 +781,10 @@ a:active {
   #DivShowProduct .img-thumb {
     width: 360px;
     height: 400px;
+  }
+
+  #catalogName {
+    padding-top: 180px;
   }
   .nav {
     grid-area: nav;
@@ -783,7 +799,7 @@ a:active {
     padding-top: 10px;
 
     margin-bottom: 20px;
-    /* position: fixed; */
+    position: fixed;
   }
   .logo-set-small {
     display: flex;
@@ -845,6 +861,8 @@ a:active {
     text-align: center;
   }
   #groupCatalog {
+    padding-top: 200px;
+
     width: 610px;
     grid-template-areas:
       "cataloge-A cataloge-A cataloge-A"
